@@ -18,9 +18,7 @@ exports.onCreateNode = ({ node, actions }) => {
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
-  return new Promise(resolve => {
-    graphql(`
-      {
+/*
         allSeeker {
           edges {
             node {
@@ -30,10 +28,19 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
         }
+*/
+  return new Promise(resolve => {
+    graphql(`
+      {
+        site {
+          siteMetadata {
+            title
+          }
+        }
       }
     `).then(result => {
       if (result.data) {
-        result.data.allSeeker.edges.forEach(({ node }) => {
+        /*result.data.allSeeker.edges*/ [].forEach(({ node }) => {
           createPage({
             path: node.fields.slug,
             component: path.resolve(`./src/templates/job-post.js`),

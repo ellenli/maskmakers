@@ -85,21 +85,31 @@ export default ({ data, location }) => {
 };
 
 export const query = graphql`
-  query($slug: String!) {
-    seeker(fields: { slug: { eq: $slug } }) {
-      id
-      job {
-        id
-        job_title
-        job_description
-        job_location
-        creation_date
-        job_application_link
-        company {
-          name
-          company_url
-        }
+  query {
+    site {
+      siteMetadata {
+        title
       }
     }
   }
 `;
+
+// export const query = graphql`
+//   query($slug: String!) {
+//     seeker(fields: { slug: { eq: $slug } }) {
+//       id
+//       job {
+//         id
+//         job_title
+//         job_description
+//         job_location
+//         creation_date
+//         job_application_link
+//         company {
+//           name
+//           company_url
+//         }
+//       }
+//     }
+//   }
+// `;
