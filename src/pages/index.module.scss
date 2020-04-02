@@ -11,6 +11,7 @@
 .main {
   position: static;
   overflow-y: scroll;
+  background-color: $primary-orange;
   padding: var(--page-shell-padding);
   transition: all 0.5s ease;
   width: 100%;
@@ -21,7 +22,7 @@
 
 .sidebar {
   overflow-y: scroll;
-  background-color: var(--gray);
+  background-color: var(--white);
   @media (min-width: $desktop) {
     min-width: var(--sidebar);
     width: var(--sidebar);
@@ -34,13 +35,13 @@
 
 .filterContainer {
   padding: 0 var(--page-shell-padding) var(--page-shell-padding);
-  color: var(--text);
+  color: $primary-purple;
   background-color: var(--background);
   display: none;
   @media (min-width: $desktop) {
     display: block;
-    --background: var(--gray);
-    --text: white;
+    --background: var(--white);
+    --text: $primary-purple;
     position: static;
     transform: translateX(0);
   }
@@ -69,7 +70,9 @@
 }
 
 .filterCategoryTitle {
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: $pt-mono;
   padding: 24px 0 16px;
 }
 
@@ -91,7 +94,7 @@
   border: none;
   padding: calc(var(--page-shell-padding) / 4);
   margin: calc(var(--page-shell-padding) / 8);
-  font-family: $pitch;
+  font-family: $pt-mono;
   color: var(--text);
   line-height: 1;
   border-radius: 2px;

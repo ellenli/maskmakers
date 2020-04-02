@@ -1,8 +1,7 @@
 import React from "react";
 import Img from "gatsby-image";
 import MapIcon from "../../icons/map";
-import LinkIcon from "../../icons/link";
-import TwitterIcon from "../../icons/twitter";
+import BriefcaseIcon from "../../icons/briefcase";
 import styles from "./profile.module.scss";
 import Button from "../button";
 
@@ -11,7 +10,7 @@ const Profile = props => {
     <div
       className={styles.profile}
       style={{
-        "--profile-theme-color": props.hex === "#FFFFFF" ? "#1da1f2" : props.hex
+        "--profile-theme-color": "#6362fc"
       }}
     >
       {props.sizes ? (
@@ -28,47 +27,36 @@ const Profile = props => {
           src={props.image.replace("_normal", "_400x400")}
         />
       )}
-      <h2 className={styles.name}>{props.name}</h2>
-      <p className={styles.location}>
-        <MapIcon
-          style={{ marginBottom: "-2px", marginRight: "2px" }}
-          size={14}
-        />
-        {props.location}
-      </p>
-      <div className={styles.url}>
-        <LinkIcon size={14} />
+      <div className={styles.card}>
+        <h2 className={styles.name}>{props.name}</h2>
+        <p className={styles.location}>
+          <MapIcon style={{ marginBottom: "-2px", marginRight: "2px" }} size={14} />
+          {props.location}
+        </p>
+        <p className={styles.location}>
+          <BriefcaseIcon style={{ marginBottom: "-2px", marginRight: "2px" }} size={14} />
+          Solo maker
+        </p>
+        <p className={styles.location}>
+          <BriefcaseIcon style={{ marginBottom: "-2px", marginRight: "2px" }} size={14} />
+          Non-medical masks
+        </p>
 
-        {props.expandedUrl ? (
-          <a href={props.expandedUrl} target="_blank" rel="noopener noreferrer">
-            {props.displayUrl}
-          </a>
-        ) : (
-          <span>N/A</span>
-        )}
+        <Button
+          href={props.websiteUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            backgroundColor: "#FF805C",
+            borderRadius: 99,
+            gridColumn: "1 / -1",
+            marginTop: "16px",
+            marginBottom: "12px"
+          }}
+        >
+          <span className={styles.linkText}>Visit Website</span>
+        </Button>
       </div>
-
-      <p
-        className={styles.description}
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: props.description }}
-      />
-
-      <Button
-        href={`https://twitter.com/${props.handle}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        style={{
-          "--background": "var(--profile-theme-color)",
-          gridColumn: "1 / -1",
-          marginTop: "auto",
-          marginBottom: 0
-        }}
-      >
-        <span className={styles.linkText}>
-          <TwitterIcon style={{ color: "white" }} /> Twitter
-        </span>
-      </Button>
     </div>
   );
 };

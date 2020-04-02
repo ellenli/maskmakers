@@ -23,6 +23,29 @@ const capitalize = s => {
   return s.charAt(0).toUpperCase() + s.slice(1);
 };
 
+const mockData = {
+  allTwitterProfile: {
+    edges: [
+      {
+        node: {
+          profile: {
+            profile_image_url_https:
+              "https://cdn-images-1.medium.com/max/1200/1*RvamSvOiBM7OvjbBE_FLLw@2x.jpeg",
+            name: "Jessica Tam",
+            businessType: "solo-maker",
+            maskType: "non-medical-use",
+            location: "San Francisco, USA",
+            websiteUrl: "https://uglycute.life/",
+            tags: {
+              toronto: true
+            }
+          }
+        }
+      }
+    ]
+  }
+};
+
 const App = ({ data }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [visibleDesigners, setVisibleDesigners] = useState([]);
@@ -38,16 +61,16 @@ const App = ({ data }) => {
   const profileContainerRef = useRef();
 
   const filterCategoryTypes = [
-    { name: "Expertise", id: "expertise" },
-    { name: "Position", id: "position" },
-    { name: "Location", id: "location" }
+    { name: "Location (City)", id: "location" },
+    { name: "Business Type", id: "businessType" },
+    { name: "Mask Type", id: "maskType" }
   ];
 
   useEffect(() => {
-    const shuffledDesigners = [];//shuffle(data.allTwitterProfile.edges);
+    const shuffledDesigners = shuffle(mockData.allTwitterProfile.edges);
     setVisibleDesigners(shuffledDesigners);
     setIsLoading(false);
-  }, [[]]);
+  }, [mockData.allTwitterProfile.edges]);
 
   const numDesignersPerPage = 52;
   const numPagesToShowInPagination = 5;
@@ -73,7 +96,6 @@ const App = ({ data }) => {
         <div className={styles.sidebar}>
           <Nav
             filter
-            theme="dark"
             toggleFilterList={() => {
               setIsFilterListVisible(!isFilterListVisible);
             }}
@@ -120,7 +142,7 @@ const App = ({ data }) => {
                       className={styles.filterItemInput}
                       title={category.title}
                       count={
-                        1//data[`tagCount${capitalize(category.id)}`].totalCount
+                        1 //data[`tagCount${capitalize(category.id)}`].totalCount
                       }
                     />
                   ))}
@@ -193,18 +215,19 @@ const App = ({ data }) => {
                       name={designer.profile.name}
                       description={designer.profile.description}
                       location={designer.profile.location || "N/A"}
-                      hex={`#${designer.profile.profile_link_color}`}
+                      hex="#FFFFFF"
                       key={designer.profile.screen_name}
                       contrast={designer.profile.contrast}
-                      displayUrl={
-                        designer.profile.entities.url &&
-                        designer.profile.entities.url.urls[0].display_url
-                      }
-                      expandedUrl={
-                        designer.profile.entities.url &&
-                        designer.profile.entities.url.urls[0].expanded_url
-                      }
+                      // displayUrl={
+                      //   designer.profile.entities.url &&
+                      //   designer.profile.entities.url.urls[0].display_url
+                      // }
+                      // expandedUrl={
+                      //   designer.profile.entities.url &&
+                      //   designer.profile.entities.url.urls[0].expanded_url
+                      // }
                       handle={designer.profile.screen_name}
+                      websiteUrl={designer.profile.websiteUrl}
                     />
                   );
                 })}
@@ -237,10 +260,7 @@ const App = ({ data }) => {
                 {pagination.pages.map(pageNumber => {
                   // Skip over these page numbers because they'll always appear
                   // in the pagination.
-                  if (
-                    pageNumber === 1 ||
-                    pageNumber === pagination.totalPages
-                  ) {
+                  if (pageNumber === 1 || pageNumber === pagination.totalPages) {
                     return null;
                   }
 
@@ -324,9 +344,7 @@ const App = ({ data }) => {
                 </div>
                 <div className={styles.dialogBody}>
                   {filterCategoryTypes.map(section => {
-                    const categoriesInSection = categories.filter(
-                      c => c[section.id]
-                    );
+                    const categoriesInSection = categories.filter(c => c[section.id]);
                     const sortedCategoriesInSection = sortBy(
                       categoriesInSection,
                       category => category.title
@@ -334,9 +352,7 @@ const App = ({ data }) => {
 
                     return (
                       <div key={section.id}>
-                        <h3 className={styles.filterCategoryTitle}>
-                          {section.name}
-                        </h3>
+                        <h3 className={styles.filterCategoryTitle}>{section.name}</h3>
                         {sortedCategoriesInSection.map(category => (
                           <FilterItem
                             key={category.id}
@@ -351,9 +367,7 @@ const App = ({ data }) => {
                               if (isChecked) {
                                 newSelectedFilters.push(categoryId);
                               } else {
-                                const i = newSelectedFilters.indexOf(
-                                  categoryId
-                                );
+                                const i = newSelectedFilters.indexOf(categoryId);
                                 newSelectedFilters.splice(i, 1);
                               }
 

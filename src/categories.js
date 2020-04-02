@@ -1,147 +1,37 @@
 const categories = [
   {
-    title: "Art directors",
-    id: "art",
-    expertise: true
-  },
-  {
-    title: "Authors",
-    id: "author",
-    position: true
-  },
-  {
-    title: "CEOs",
-    id: "ceo",
-    position: true
-  },
-  {
-    title: "Content strategists",
-    id: "content",
-    expertise: true
-  },
-  {
-    title: "Creative directors",
-    id: "creative",
-    expertise: true
-  },
-  {
-    title: "Design system-ers",
-    id: "systems",
-    expertise: true
-  },
-  {
-    title: "Directors",
-    id: "director",
-    position: true
-  },
-  {
-    title: "Developers",
-    id: "developer",
-    expertise: true
-  },
-  {
-    title: "Engineers",
-    id: "engineer",
-    expertise: true
-  },
-  {
-    title: "Founders",
-    id: "founder",
-    position: true
-  },
-  {
-    title: "Freelancers",
-    id: "freelance",
-    position: true
-  },
-  {
-    title: "Graphic designers",
-    id: "graphic",
-    expertise: true
-  },
-  {
-    title: "Heads of",
-    id: "head",
-    position: true
-  },
-  {
-    title: "Illustrators",
-    id: "illustrator",
-    expertise: true
-  },
-  {
-    title: "Leads",
-    id: "lead",
-    position: true
-  },
-  {
-    title: "Letterers",
-    id: "letter",
-    expertise: true
-  },
-  {
-    title: "Managers",
-    id: "manager",
-    position: true
-  },
-  {
-    title: "Product designers",
-    id: "product",
-    expertise: true
-  },
-  {
-    title: "Researchers",
-    id: "research",
-    expertise: true
-  },
-  {
-    title: "Speakers",
-    id: "speaker",
-    position: true
-  },
-  {
-    title: "Type designers",
-    id: "typeface",
-    expertise: true
-  },
-  {
-    title: "UX designers",
-    id: "ux",
-    expertise: true
-  },
-  {
-    title: "VPs",
-    id: "vp",
-    position: true
-  },
-  {
-    title: "Web designers",
-    id: "web",
-    expertise: true
-  },
-  {
-    title: "Writers",
-    id: "writer",
-    expertise: true
-  },
-  {
-    title: "New York",
-    id: "nyc",
+    title: "Alberta",
+    id: "alberta",
     location: true
   },
   {
-    title: "Bay Area",
-    id: "ba",
+    title: "Banff",
+    id: "banff",
     location: true
   },
   {
-    title: "Los Angeles",
-    id: "la",
+    title: "Calgary",
+    id: "calgary",
     location: true
   },
   {
-    title: "Seattle",
-    id: "seattle",
+    title: "Guelph",
+    id: "guelph",
+    location: true
+  },
+  {
+    title: "Hamilton",
+    id: "hamilton",
+    location: true
+  },
+  {
+    title: "Kingston",
+    id: "kingston",
+    location: true
+  },
+  {
+    title: "Kitchener",
+    id: "kitchener",
     location: true
   },
   {
@@ -150,24 +40,64 @@ const categories = [
     location: true
   },
   {
+    title: "Markham",
+    id: "markham",
+    location: true
+  },
+  {
+    title: "Missisauga",
+    id: "missisauga",
+    location: true
+  },
+  {
+    title: "Niagara Falls",
+    id: "niagara-falls",
+    location: true
+  },
+  {
+    title: "Stratford",
+    id: "stratford",
+    location: true
+  },
+  {
     title: "Toronto",
     id: "toronto",
     location: true
   },
   {
-    title: "Portland",
-    id: "portland",
+    title: "Vaughn",
+    id: "vaughn",
     location: true
   },
   {
-    title: "Austin",
-    id: "austin",
+    title: "Waterloo",
+    id: "waterloo",
     location: true
   },
   {
-    title: "Vancouver",
-    id: "vancouver",
-    location: true
+    title: "Solo Maker",
+    id: "solo-maker",
+    businessType: true
+  },
+  {
+    title: "Companies",
+    id: "companies",
+    businessType: true
+  },
+  {
+    title: "Medical use",
+    id: "medical-use",
+    maskType: true
+  },
+  {
+    title: "Non-medical use",
+    id: "non-medical-use",
+    maskType: true
+  },
+  {
+    title: "Both",
+    id: "both",
+    maskType: true
   }
 ];
 
