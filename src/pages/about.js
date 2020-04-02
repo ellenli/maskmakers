@@ -7,149 +7,79 @@ import classnames from "classnames";
 import Nav from "../components/nav";
 import styles from "./about.module.scss";
 import Layout from "../components/layout";
-import BlacksWhoDesign from "../friends/blackswhodesign.svg";
-import LatinxsWhoDesign from "../friends/latinxswhodesign.png";
-import PeopleOfCraft from "../friends/peopleofcraft.png";
-import QueerDesignClub from "../friends/queerdesignclub.svg";
-import IndiansWhoDesign from "../friends/indianswhodesign.svg";
-import FilipinosWhoDesign from "../friends/filipinoswhodesign.png";
 import Button from "../components/button";
-
-const friends = [
-  {
-    title: "Blacks Who Design",
-    link: "https://blackswho.design/",
-    image: BlacksWhoDesign
-  },
-  {
-    title: "Latinxs Who Design",
-    link: "https://latinxswhodesign.com",
-    image: LatinxsWhoDesign,
-    invert: true
-  },
-  {
-    title: "People of Craft",
-    link: "https://peopleofcraft.com/",
-    image: PeopleOfCraft
-  },
-  {
-    title: "Queer Design Club",
-    link: "https://queerdesign.club/",
-    image: QueerDesignClub,
-    invert: true
-  },
-  {
-    title: "Filipinos Who Design",
-    link: "http://filipinoswhodesign.club/",
-    image: FilipinosWhoDesign,
-    invert: true,
-    contrast: true
-  },
-  {
-    title: "Indians Who Design",
-    link: "https://indianswhodesign.in/",
-    image: IndiansWhoDesign
-  }
-];
-
-const sortedFriends = sortBy(friends, friend => friend.title);
 
 const App = () => (
   <Layout>
-    <Helmet title="About | Women Who Design" />
+    <Helmet title="About" />
     <Nav theme="light" />
     <div className={styles.container}>
       <h1 className={styles.h1}>About this project</h1>
       <p>
-        Women Who Design is a Twitter directory of accomplished women in the
-        design industry. It aims to help people find notable and relevant voices
-        to follow on Twitter by parsing Twitter bios for popular keywords.
+        Women Who Design is a Twitter directory of accomplished women in the design
+        industry. It aims to help people find notable and relevant voices to follow on
+        Twitter by parsing Twitter bios for popular keywords.
       </p>
 
       <h2 className={styles.emphasis}>Source code</h2>
       <p>
-        Women Who Design is happy to support new directories highlighting
-        underrepresented or marginalized groups. If you're looking to start a
-        similar effort, feel free to fork the project on{" "}
+        Women Who Design is happy to support new directories highlighting underrepresented
+        or marginalized groups. If you're looking to start a similar effort, feel free to
+        fork the project on{" "}
         <a href="https://github.com/julesforrest/womenwhodesign">GitHub</a>.
       </p>
       <h2 className={styles.emphasis}>Similar directories</h2>
       <p>
-        Examining diversity along the axis of gender is one small piece of the
-        puzzle. If you've found this site to be valuable, please take a look at
-        the work of friends in the industry building similar efforts.
+        Examining diversity along the axis of gender is one small piece of the puzzle. If
+        you've found this site to be valuable, please take a look at the work of friends
+        in the industry building similar efforts.
       </p>
-      <div className={styles.friendContainer}>
-        {sortedFriends.map((friend, index) => {
-          const friendImageStyles = classnames({
-            [styles.friendImage]: true,
-            [styles.friendImageInvert]: friend.invert === true,
-            [styles.friendImageContrast]: friend.contrast === true
-          });
-          return (
-            <a
-              href={friend.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              key={index}
-              className={styles.friendItem}
-            >
-              <img src={friend.image} className={friendImageStyles} />
-              <p className={styles.friendTitle}>{friend.title}</p>
-            </a>
-          );
-        })}
-      </div>
       <h1 className={styles.h1}>How to use</h1>
       <p>Here are some things Women Who Design can help you with:</p>
 
       <h2 className={styles.emphasis}>
         Use{" "}
-        <a
-          href="https://www.proporti.onl/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="https://www.proporti.onl/" target="_blank" rel="noopener noreferrer">
           proporti.onl
         </a>{" "}
         to check the ratio of the people you follow on Twitter.
       </h2>
       <p>
-        If you're following more men than women, use this project to follow new
-        women and diversify the voices in your feed. Be aware that a feed of
-        white women is not diverse.
+        If you're following more men than women, use this project to follow new women and
+        diversify the voices in your feed. Be aware that a feed of white women is not
+        diverse.
       </p>
       <h2 className={styles.emphasis}>
         If you're a hiring manager, use this project to find candidates.{" "}
       </h2>
       <p>
-        Examine the ratio of senior men to senior women in your organization.
-        Are women of color equally represented? Consider hiring women into
-        promotions above their current role.
+        Examine the ratio of senior men to senior women in your organization. Are women of
+        color equally represented? Consider hiring women into promotions above their
+        current role.
       </p>
 
       <h2 className={styles.emphasis}>
         If you're organizing a conference, use this project to find speakers.
       </h2>
       <p>
-        Ensure that the women's speaking slots are as prominent as the men's.
-        Are women of color equally represented? Consider reaching out to women
-        who have never given a talk before.
+        Ensure that the women's speaking slots are as prominent as the men's. Are women of
+        color equally represented? Consider reaching out to women who have never given a
+        talk before.
       </p>
 
       <h2 className={styles.emphasis}>
         If you have a podcast, use this project to find new guests.{" "}
       </h2>
       <p>
-        Be mindful of interruptions and ensure that your women guests get equal
-        speaking time. Are women of color equally represented? Consider inviting
-        women who don't already have an audience.
+        Be mindful of interruptions and ensure that your women guests get equal speaking
+        time. Are women of color equally represented? Consider inviting women who don't
+        already have an audience.
       </p>
 
       <h2 className={styles.emphasis}>Further reading</h2>
       <p>
-        For becoming a better ally – to women, people of color, LGBTQ, disabled,
-        ESL or any other marginalized group.
+        For becoming a better ally – to women, people of color, LGBTQ, disabled, ESL or
+        any other marginalized group.
       </p>
 
       <ul className={styles.ul}>
@@ -208,19 +138,16 @@ const App = () => (
       <h1 className={styles.h1}>Other notes</h1>
       <h2 className={styles.emphasis}>Support</h2>
       <p>
-        Women Who Design is an independent project. If you're interested in
-        supporting it, please consider posting a job.
+        Women Who Design is an independent project. If you're interested in supporting it,
+        please consider posting a job.
       </p>
-      <Button
-        href="https://womenwhodesign.seeker.company/submit/job"
-        width="auto"
-      >
+      <Button href="https://womenwhodesign.seeker.company/submit/job" width="auto">
         Post a job
       </Button>
       <h2 className={styles.emphasis}>Opt out</h2>
       <p>
-        If you've been featured in the directory and you'd rather not be, please
-        send a DM to{" "}
+        If you've been featured in the directory and you'd rather not be, please send a DM
+        to{" "}
         <a
           href="https://twitter.com/womenwhodesign"
           target="_blank"

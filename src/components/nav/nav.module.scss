@@ -2,7 +2,7 @@
 
 .container {
   padding: var(--page-shell-padding);
-  font-family: $pitch;
+  font-family: $pt-mono;
   color: var(--text);
   background-color: var(--background);
   a:focus,
@@ -21,8 +21,7 @@
 
 .logo {
   display: block;
-  width: 150px;
-  fill: var(--text);
+  width: 180px;
 }
 
 .links {
@@ -31,18 +30,17 @@
 
 .link {
   display: inline-block;
-  text-transform: uppercase;
-  font-size: 15px;
+  font-size: 13px;
   text-decoration: none;
-  font-weight: 500;
-  color: var(--text);
+  font-weight: 600;
+  color: $primary-purple;
   position: relative;
   margin-right: 20px;
   background-color: transparent;
   border: none;
   padding: 0;
   cursor: pointer;
-  font-family: $pitch;
+  font-family: $pt-mono;
   &:hover {
     text-decoration: underline;
   }

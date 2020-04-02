@@ -1,8 +1,8 @@
 @import "../styles/variables.scss";
 
 .container {
+  background-color: $primary-orange;
   font-family: $graphik;
-  max-width: 42rem;
   font-size: 16px;
   padding: var(--page-shell-padding) var(--page-shell-padding) 48px
     var(--page-shell-padding);
@@ -92,7 +92,7 @@
 .backLink {
   text-transform: uppercase;
   font-size: 15px;
-  font-family: $pitch;
+  font-family: $pt-mono;
   text-decoration: none;
   &:hover {
     text-decoration: underline;
@@ -176,7 +176,7 @@
 }
 
 .jobDate {
-  font-family: $pitch;
+  font-family: $pt-mono;
   color: var(--light-gray);
   font-size: 13px;
   text-transform: uppercase;
@@ -234,7 +234,7 @@
   display: block;
   padding: 12px 0;
   font-size: 15px;
-  font-family: $pitch;
+  font-family: $pt-mono;
   font-weight: 600;
   text-transform: uppercase;
   margin-top: auto;
@@ -309,7 +309,7 @@
 
 .friendTitle {
   color: var(--text);
-  font-family: $pitch;
+  font-family: $pt-mono;
   font-weight: 600;
   font-size: 13px;
   text-transform: uppercase;
