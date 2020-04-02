@@ -44,10 +44,10 @@ const App = ({ data }) => {
   ];
 
   useEffect(() => {
-    const shuffledDesigners = shuffle(data.allTwitterProfile.edges);
+    const shuffledDesigners = [];//shuffle(data.allTwitterProfile.edges);
     setVisibleDesigners(shuffledDesigners);
     setIsLoading(false);
-  }, [data.allTwitterProfile.edges]);
+  }, [[]]);
 
   const numDesignersPerPage = 52;
   const numPagesToShowInPagination = 5;
@@ -120,7 +120,7 @@ const App = ({ data }) => {
                       className={styles.filterItemInput}
                       title={category.title}
                       count={
-                        data[`tagCount${capitalize(category.id)}`].totalCount
+                        1//data[`tagCount${capitalize(category.id)}`].totalCount
                       }
                     />
                   ))}
@@ -387,6 +387,15 @@ export default App;
 
 export const pageQuery = graphql`
   query Index {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+  }
+`;
+
+/*
     allTwitterProfile {
       edges {
         node {
@@ -443,211 +452,8 @@ export const pageQuery = graphql`
               web
               writer
             }
-            entities {
-              url {
-                urls {
-                  expanded_url
-                  display_url
-                }
-              }
-            }
           }
         }
       }
     }
-
-    tagCountArt: allTwitterProfile(
-      filter: { profile: { tags: { art: { eq: true } } } }
-    ) {
-      totalCount
-    }
-
-    tagCountAuthor: allTwitterProfile(
-      filter: { profile: { tags: { author: { eq: true } } } }
-    ) {
-      totalCount
-    }
-
-    tagCountCeo: allTwitterProfile(
-      filter: { profile: { tags: { ceo: { eq: true } } } }
-    ) {
-      totalCount
-    }
-
-    tagCountContent: allTwitterProfile(
-      filter: { profile: { tags: { content: { eq: true } } } }
-    ) {
-      totalCount
-    }
-
-    tagCountCreative: allTwitterProfile(
-      filter: { profile: { tags: { creative: { eq: true } } } }
-    ) {
-      totalCount
-    }
-
-    tagCountDeveloper: allTwitterProfile(
-      filter: { profile: { tags: { developer: { eq: true } } } }
-    ) {
-      totalCount
-    }
-
-    tagCountDirector: allTwitterProfile(
-      filter: { profile: { tags: { director: { eq: true } } } }
-    ) {
-      totalCount
-    }
-
-    tagCountEngineer: allTwitterProfile(
-      filter: { profile: { tags: { engineer: { eq: true } } } }
-    ) {
-      totalCount
-    }
-
-    tagCountFounder: allTwitterProfile(
-      filter: { profile: { tags: { founder: { eq: true } } } }
-    ) {
-      totalCount
-    }
-
-    tagCountFreelance: allTwitterProfile(
-      filter: { profile: { tags: { freelance: { eq: true } } } }
-    ) {
-      totalCount
-    }
-
-    tagCountGraphic: allTwitterProfile(
-      filter: { profile: { tags: { graphic: { eq: true } } } }
-    ) {
-      totalCount
-    }
-
-    tagCountHead: allTwitterProfile(
-      filter: { profile: { tags: { head: { eq: true } } } }
-    ) {
-      totalCount
-    }
-
-    tagCountIllustrator: allTwitterProfile(
-      filter: { profile: { tags: { illustrator: { eq: true } } } }
-    ) {
-      totalCount
-    }
-
-    tagCountLead: allTwitterProfile(
-      filter: { profile: { tags: { lead: { eq: true } } } }
-    ) {
-      totalCount
-    }
-
-    tagCountLetter: allTwitterProfile(
-      filter: { profile: { tags: { letter: { eq: true } } } }
-    ) {
-      totalCount
-    }
-
-    tagCountManager: allTwitterProfile(
-      filter: { profile: { tags: { manager: { eq: true } } } }
-    ) {
-      totalCount
-    }
-
-    tagCountProduct: allTwitterProfile(
-      filter: { profile: { tags: { product: { eq: true } } } }
-    ) {
-      totalCount
-    }
-
-    tagCountResearch: allTwitterProfile(
-      filter: { profile: { tags: { research: { eq: true } } } }
-    ) {
-      totalCount
-    }
-
-    tagCountSpeaker: allTwitterProfile(
-      filter: { profile: { tags: { speaker: { eq: true } } } }
-    ) {
-      totalCount
-    }
-
-    tagCountSystems: allTwitterProfile(
-      filter: { profile: { tags: { systems: { eq: true } } } }
-    ) {
-      totalCount
-    }
-
-    tagCountUx: allTwitterProfile(
-      filter: { profile: { tags: { ux: { eq: true } } } }
-    ) {
-      totalCount
-    }
-
-    tagCountVp: allTwitterProfile(
-      filter: { profile: { tags: { vp: { eq: true } } } }
-    ) {
-      totalCount
-    }
-
-    tagCountWeb: allTwitterProfile(
-      filter: { profile: { tags: { web: { eq: true } } } }
-    ) {
-      totalCount
-    }
-
-    tagCountWriter: allTwitterProfile(
-      filter: { profile: { tags: { writer: { eq: true } } } }
-    ) {
-      totalCount
-    }
-    tagCountBa: allTwitterProfile(
-      filter: { profile: { tags: { ba: { eq: true } } } }
-    ) {
-      totalCount
-    }
-    tagCountLa: allTwitterProfile(
-      filter: { profile: { tags: { la: { eq: true } } } }
-    ) {
-      totalCount
-    }
-    tagCountNyc: allTwitterProfile(
-      filter: { profile: { tags: { nyc: { eq: true } } } }
-    ) {
-      totalCount
-    }
-    tagCountLondon: allTwitterProfile(
-      filter: { profile: { tags: { london: { eq: true } } } }
-    ) {
-      totalCount
-    }
-    tagCountSeattle: allTwitterProfile(
-      filter: { profile: { tags: { seattle: { eq: true } } } }
-    ) {
-      totalCount
-    }
-    tagCountAustin: allTwitterProfile(
-      filter: { profile: { tags: { austin: { eq: true } } } }
-    ) {
-      totalCount
-    }
-    tagCountPortland: allTwitterProfile(
-      filter: { profile: { tags: { portland: { eq: true } } } }
-    ) {
-      totalCount
-    }
-    tagCountToronto: allTwitterProfile(
-      filter: { profile: { tags: { toronto: { eq: true } } } }
-    ) {
-      totalCount
-    }
-    tagCountTypeface: allTwitterProfile(
-      filter: { profile: { tags: { typeface: { eq: true } } } }
-    ) {
-      totalCount
-    }
-    tagCountVancouver: allTwitterProfile(
-      filter: { profile: { tags: { vancouver: { eq: true } } } }
-    ) {
-      totalCount
-    }
-  }
-`;
+*/

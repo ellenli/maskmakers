@@ -10,8 +10,8 @@ import MapIcon from "../icons/map";
 import Button from "../components/button";
 
 const Jobs = props => {
-  const emptyState =
-    props.data.allSeeker.edges[0].node.job.job_title === "Empty";
+  const emptyState = true;
+    // props.data.allSeeker.edges[0].node.job.job_title === "Empty";
   return (
     <Layout>
       <Helmet
@@ -67,7 +67,7 @@ const Jobs = props => {
               </Button>
             </div>
             <ul>
-              {props.data.allSeeker.edges.map((job, index) => {
+              {/*props.data.allSeeker.edges*/[].map((job, index) => {
                 const date = ta.ago(job.node.job.creation_date);
                 return (
                   <li key={index}>
@@ -126,27 +126,36 @@ export default Jobs;
 
 export const pageQuery = graphql`
   query Jobs {
-    allSeeker(sort: { fields: job___creation_date, order: DESC }) {
-      edges {
-        node {
-          id
-          fields {
-            slug
-          }
-          job {
-            job_title
-            job_link
-            job_application_link
-            job_description
-            job_location
-            creation_date
-            company {
-              name
-              company_url
-            }
-          }
-        }
+    site {
+      siteMetadata {
+        title
       }
     }
   }
 `;
+// export const pageQuery = graphql`
+//   query Jobs {
+//     allSeeker(sort: { fields: job___creation_date, order: DESC }) {
+//       edges {
+//         node {
+//           id
+//           fields {
+//             slug
+//           }
+//           job {
+//             job_title
+//             job_link
+//             job_application_link
+//             job_description
+//             job_location
+//             creation_date
+//             company {
+//               name
+//               company_url
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;
