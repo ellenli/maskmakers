@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import "reset-css";
 import { shuffle, sortBy } from "lodash";
-import { graphql } from "gatsby";
+import { graphql, useStaticQuery } from "gatsby";
 import classnames from "classnames";
 import { DialogOverlay, DialogContent } from "@reach/dialog";
 import ClickableBox from "clickable-box";
-import categories from "../categories";
 import Profile from "../components/profile";
 import Layout from "../components/layout";
 import FilterItem from "../components/filter-item";
@@ -18,35 +17,48 @@ import CloseIcon from "../icons/close";
 import FilterIcon from "../icons/filter";
 import Button from "../components/button";
 
-const capitalize = s => {
-  if (typeof s !== "string") return "";
-  return s.charAt(0).toUpperCase() + s.slice(1);
+const createCategory = (value, type, count) => {
+  return {
+    title: value,
+    id: value.toLowerCase(),
+    location: type === "location",
+    country: type === "country",
+    count
+  };
 };
 
-const mockData = {
-  allTwitterProfile: {
-    edges: [
-      {
-        node: {
-          profile: {
-            profile_image_url_https:
-              "https://cdn-images-1.medium.com/max/1200/1*RvamSvOiBM7OvjbBE_FLLw@2x.jpeg",
-            name: "Jessica Tam",
-            businessType: "solo-maker",
-            maskType: "non-medical-use",
-            location: "San Francisco, USA",
-            websiteUrl: "https://uglycute.life/",
-            tags: {
-              toronto: true
+const App = () => {
+  const categories = [];
+
+  const data = useStaticQuery(graphql`
+    {
+      allAirtable(filter: { table: { eq: "providers" } }) {
+        edges {
+          node {
+            recordId
+            data {
+              name
+              websiteUrl
+              location
+              country
+              photo {
+                url
+              }
             }
           }
         }
+        locations: group(field: data___location) {
+          fieldValue
+          totalCount
+        }
+        countries: group(field: data___country) {
+          fieldValue
+          totalCount
+        }
       }
-    ]
-  }
-};
+    }
+  `);
 
-const App = ({ data }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [visibleDesigners, setVisibleDesigners] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState([]);
@@ -61,16 +73,30 @@ const App = ({ data }) => {
   const profileContainerRef = useRef();
 
   const filterCategoryTypes = [
-    { name: "Location (City)", id: "location" },
-    { name: "Business Type", id: "businessType" },
-    { name: "Mask Type", id: "maskType" }
+    { name: "Location (Country)", id: "country" },
+    { name: "Location (City)", id: "location" }
   ];
 
+  // dynamically create categories from location and country fields in database
+  // if this ever causes issue, revert back to manual creation of these categories
+  // ---
+  console.log("EEEH");
+  data.allAirtable.locations.map(location => {
+    const category = createCategory(location.fieldValue, "location", location.totalCount);
+    return categories.push(category);
+  });
+
+  data.allAirtable.countries.map(country => {
+    const category = createCategory(country.fieldValue, "country", country.totalCount);
+    return categories.push(category);
+  });
+  // ---
+
   useEffect(() => {
-    const shuffledDesigners = shuffle(mockData.allTwitterProfile.edges);
+    const shuffledDesigners = shuffle(data.allAirtable.edges);
     setVisibleDesigners(shuffledDesigners);
     setIsLoading(false);
-  }, [mockData.allTwitterProfile.edges]);
+  }, [data.allAirtable.edges]);
 
   const numDesignersPerPage = 52;
   const numPagesToShowInPagination = 5;
@@ -80,7 +106,14 @@ const App = ({ data }) => {
       return true;
     }
 
-    return selectedFilters.some(filter => designer.node.profile.tags[filter]);
+    return selectedFilters.some(filter => {
+      const { location, country } = designer.node.data;
+      if (location && country) {
+        return location.toLowerCase() === filter || country.toLowerCase() === filter;
+      }
+
+      return null;
+    });
   });
 
   const pagination = paginate(
@@ -117,35 +150,35 @@ const App = ({ data }) => {
               return (
                 <div key={section.id}>
                   <h3 className={styles.filterCategoryTitle}>{section.name}</h3>
-                  {sortedCategoriesInSection.map(category => (
-                    <FilterItem
-                      key={category.id}
-                      id={category.id}
-                      type="row"
-                      onChange={e => {
-                        const categoryId = e.target.value;
-                        const isChecked = e.target.checked;
+                  {sortedCategoriesInSection.map(category => {
+                    return (
+                      <FilterItem
+                        key={category.id}
+                        id={category.id}
+                        type="row"
+                        onChange={e => {
+                          const categoryId = e.target.value;
+                          const isChecked = e.target.checked;
 
-                        const newSelectedFilters = [...selectedFilters];
+                          const newSelectedFilters = [...selectedFilters];
 
-                        if (isChecked) {
-                          newSelectedFilters.push(categoryId);
-                        } else {
-                          const i = newSelectedFilters.indexOf(categoryId);
-                          newSelectedFilters.splice(i, 1);
-                        }
+                          if (isChecked) {
+                            newSelectedFilters.push(categoryId);
+                          } else {
+                            const i = newSelectedFilters.indexOf(categoryId);
+                            newSelectedFilters.splice(i, 1);
+                          }
 
-                        setSelectedFilters(newSelectedFilters);
-                        setCurrentPage(1);
-                      }}
-                      isChecked={selectedFilters.includes(category.id)}
-                      className={styles.filterItemInput}
-                      title={category.title}
-                      count={
-                        1 //data[`tagCount${capitalize(category.id)}`].totalCount
-                      }
-                    />
-                  ))}
+                          setSelectedFilters(newSelectedFilters);
+                          setCurrentPage(1);
+                        }}
+                        isChecked={selectedFilters.includes(category.id)}
+                        className={styles.filterItemInput}
+                        title={category.title}
+                        count={category.count}
+                      />
+                    );
+                  })}
                 </div>
               );
             })}
@@ -162,41 +195,9 @@ const App = ({ data }) => {
             <Loader />
           ) : (
             <>
-              {/* {selectedFilters.length > 0 && (
-                <div className={styles.filterBanner}>
-                  <h2 className={styles.filterHeadline}>→ </h2>
-                  <div className={styles.filterPillContainer}>
-                    {selectedFilters.map(filterId => (
-                      <FilterFlag
-                        title={categories.find(c => c.id === filterId).title}
-                        key={filterId}
-                        onCloseClick={() => {
-                          const newSelectedFilters = [...selectedFilters];
-                          const i = newSelectedFilters.indexOf(filterId);
-                          newSelectedFilters.splice(i, 1);
-
-                          setSelectedFilters(newSelectedFilters);
-                          setCurrentPage(1);
-                        }}
-                      />
-                    ))}
-                  </div>
-                  <button
-                    onClick={() => {
-                      setSelectedFilters([]);
-                      setCurrentPage(1);
-                    }}
-                    className={styles.filterClear}
-                    type="button"
-                  >
-                    Clear
-                  </button>
-                </div>
-              )} */}
               <div
                 className={classnames({
                   [styles.profiles]: true
-                  // [styles.filterBannerBump]: selectedFilters.length > 0
                 })}
               >
                 {filteredDesigners.map(({ node: designer }, i) => {
@@ -204,30 +205,25 @@ const App = ({ data }) => {
                     return null;
                   }
 
+                  const { recordId } = designer;
+                  const { name, websiteUrl, location, photo } = designer.data;
+
+                  if (
+                    recordId == null ||
+                    designer == null ||
+                    designer.data.name == null
+                  ) {
+                    return null;
+                  }
+
                   return (
                     <Profile
-                      image={designer.profile.profile_image_url_https}
-                      sizes={
-                        designer.localFile &&
-                        designer.localFile.childImageSharp &&
-                        designer.localFile.childImageSharp.sizes
-                      }
-                      name={designer.profile.name}
-                      description={designer.profile.description}
-                      location={designer.profile.location || "N/A"}
-                      hex="#FFFFFF"
-                      key={designer.profile.screen_name}
-                      contrast={designer.profile.contrast}
-                      // displayUrl={
-                      //   designer.profile.entities.url &&
-                      //   designer.profile.entities.url.urls[0].display_url
-                      // }
-                      // expandedUrl={
-                      //   designer.profile.entities.url &&
-                      //   designer.profile.entities.url.urls[0].expanded_url
-                      // }
-                      handle={designer.profile.screen_name}
-                      websiteUrl={designer.profile.websiteUrl}
+                      key={designer.recordId}
+                      image={photo[0].url}
+                      name={name}
+                      description={designer.data.description}
+                      location={location}
+                      websiteUrl={websiteUrl}
                     />
                   );
                 })}
@@ -399,15 +395,15 @@ const App = ({ data }) => {
 
 export default App;
 
-export const pageQuery = graphql`
-  query Index {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-  }
-`;
+// export const pageQuery = graphql`
+//   query Index {
+//     site {
+//       siteMetadata {
+//         title
+//       }
+//     }
+//   }
+// `;
 
 /*
     allTwitterProfile {

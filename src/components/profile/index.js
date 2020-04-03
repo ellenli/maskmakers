@@ -1,11 +1,12 @@
 import React from "react";
-import Img from "gatsby-image";
 import MapIcon from "../../icons/map";
 import BriefcaseIcon from "../../icons/briefcase";
 import styles from "./profile.module.scss";
 import Button from "../button";
 
 const Profile = props => {
+  const { image, name, location, websiteUrl } = props;
+
   return (
     <div
       className={styles.profile}
@@ -13,37 +14,16 @@ const Profile = props => {
         "--profile-theme-color": "#6362fc"
       }}
     >
-      {props.sizes ? (
-        <Img
-          alt={`${props.name}'s avatar on Twitter.'`}
-          sizes={props.sizes}
-          backgroundColor
-          className={styles.image}
-        />
-      ) : (
-        <img
-          className={styles.grayImage}
-          alt={`${props.name}'s avatar on Twitter.'`}
-          src={props.image.replace("_normal", "_400x400")}
-        />
-      )}
+      <div style={{ backgroundImage: `url(${image})` }} className={styles.image} />
       <div className={styles.card}>
-        <h2 className={styles.name}>{props.name}</h2>
-        <p className={styles.location}>
+        <h2 className={styles.name}>{name}</h2>
+        <p className={styles.item}>
           <MapIcon style={{ marginBottom: "-2px", marginRight: "2px" }} size={14} />
-          {props.location}
-        </p>
-        <p className={styles.location}>
-          <BriefcaseIcon style={{ marginBottom: "-2px", marginRight: "2px" }} size={14} />
-          Solo maker
-        </p>
-        <p className={styles.location}>
-          <BriefcaseIcon style={{ marginBottom: "-2px", marginRight: "2px" }} size={14} />
-          Non-medical masks
+          {location}
         </p>
 
         <Button
-          href={props.websiteUrl}
+          href={websiteUrl}
           target="_blank"
           rel="noopener noreferrer"
           style={{
