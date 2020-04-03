@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "reset-css";
 import { shuffle, sortBy } from "lodash";
-import { graphql } from "gatsby";
+import { graphql, useStaticQuery } from "gatsby";
 import classnames from "classnames";
 import { DialogOverlay, DialogContent } from "@reach/dialog";
 import ClickableBox from "clickable-box";
@@ -18,35 +18,29 @@ import CloseIcon from "../icons/close";
 import FilterIcon from "../icons/filter";
 import Button from "../components/button";
 
-const capitalize = s => {
-  if (typeof s !== "string") return "";
-  return s.charAt(0).toUpperCase() + s.slice(1);
-};
-
-const mockData = {
-  allTwitterProfile: {
-    edges: [
-      {
-        node: {
-          profile: {
-            profile_image_url_https:
-              "https://cdn-images-1.medium.com/max/1200/1*RvamSvOiBM7OvjbBE_FLLw@2x.jpeg",
-            name: "Jessica Tam",
-            businessType: "solo-maker",
-            maskType: "non-medical-use",
-            location: "San Francisco, USA",
-            websiteUrl: "https://uglycute.life/",
-            tags: {
-              toronto: true
+const App = () => {
+  const data = useStaticQuery(graphql`
+    {
+      allAirtable(filter: {table: {eq: "providers"}}) {
+        edges {
+          node {
+            recordId,
+            data {
+              name,
+              maskType,
+              businessType,
+              websiteUrl,
+              location,
+              photo {
+                url
+              }
             }
           }
         }
       }
-    ]
-  }
-};
+    }
+  `);
 
-const App = ({ data }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [visibleDesigners, setVisibleDesigners] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState([]);
@@ -67,10 +61,10 @@ const App = ({ data }) => {
   ];
 
   useEffect(() => {
-    const shuffledDesigners = shuffle(mockData.allTwitterProfile.edges);
+    const shuffledDesigners = shuffle(data.allAirtable.edges);
     setVisibleDesigners(shuffledDesigners);
     setIsLoading(false);
-  }, [mockData.allTwitterProfile.edges]);
+  }, [data.allAirtable.edges]);
 
   const numDesignersPerPage = 52;
   const numPagesToShowInPagination = 5;
@@ -142,7 +136,7 @@ const App = ({ data }) => {
                       className={styles.filterItemInput}
                       title={category.title}
                       count={
-                        1 //data[`tagCount${capitalize(category.id)}`].totalCount
+                        1 // data[`tagCount${capitalize(category.id)}`].totalCount
                       }
                     />
                   ))}
@@ -203,21 +197,20 @@ const App = ({ data }) => {
                   if (i < pagination.startIndex || i > pagination.endIndex) {
                     return null;
                   }
-
                   return (
                     <Profile
-                      image={designer.profile.profile_image_url_https}
+                      image={designer.data.photo[0].url}
                       sizes={
                         designer.localFile &&
                         designer.localFile.childImageSharp &&
                         designer.localFile.childImageSharp.sizes
                       }
-                      name={designer.profile.name}
-                      description={designer.profile.description}
-                      location={designer.profile.location || "N/A"}
+                      name={designer.data.name}
+                      description={designer.data.description}
+                      location={designer.data.location || "N/A"}
                       hex="#FFFFFF"
-                      key={designer.profile.screen_name}
-                      contrast={designer.profile.contrast}
+                      key={designer.recordId}
+                      contrast={designer.data.contrast}
                       // displayUrl={
                       //   designer.profile.entities.url &&
                       //   designer.profile.entities.url.urls[0].display_url
@@ -226,8 +219,8 @@ const App = ({ data }) => {
                       //   designer.profile.entities.url &&
                       //   designer.profile.entities.url.urls[0].expanded_url
                       // }
-                      handle={designer.profile.screen_name}
-                      websiteUrl={designer.profile.websiteUrl}
+                      handle={designer.data.name}
+                      websiteUrl={designer.data.websiteUrl}
                     />
                   );
                 })}
@@ -399,15 +392,15 @@ const App = ({ data }) => {
 
 export default App;
 
-export const pageQuery = graphql`
-  query Index {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-  }
-`;
+// export const pageQuery = graphql`
+//   query Index {
+//     site {
+//       siteMetadata {
+//         title
+//       }
+//     }
+//   }
+// `;
 
 /*
     allTwitterProfile {
