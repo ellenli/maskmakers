@@ -1,6 +1,6 @@
 {
-  "name": "women-who-design",
-  "description": "A Twitter directory of accomplished women in the design industry.",
+  "name": "mask-makers",
+  "description": "A directory for buyers to discover sewists who make reusable face masks.",
   "license": "MIT",
   "scripts": {
     "start": "gatsby develop",

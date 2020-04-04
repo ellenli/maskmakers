@@ -21,7 +21,7 @@ const Layout = ({ children }) => (
 
         {
           property: "og:image",
-          content: "https://womenwho.design/opengraph.png"
+          content: "https://maskmakers.club/opengraph.png"
         },
         {
           property: "og:url",
@@ -34,7 +34,7 @@ const Layout = ({ children }) => (
         { property: "twitter:card", content: "summary_large_image" },
         {
           property: "twitter:image",
-          content: "https://womenwho.design/opengraph.png"
+          content: "https://maskmakers.club/opengraph.png"
         }
       ]}
     />
