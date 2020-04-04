@@ -6,27 +6,6 @@ import Button from "../button";
 const Profile = props => {
   const { image, name, location, country, websiteUrl } = props;
 
-  const locationDetails = location ? (
-    <>
-      <MapIcon style={{ marginBottom: "-2px", marginRight: "2px" }} size={14} />
-      {location}
-    </>
-  ) : null;
-
-  const countryDetails = country ? (
-    <>
-      <MapIcon
-        style={{
-          marginBottom: "-2px",
-          marginRight: "2px",
-          paddingBottom: location ? "0" : "27px"
-        }}
-        size={14}
-      />
-      {country}
-    </>
-  ) : null;
-
   return (
     <a
       className={styles.profile}
@@ -37,27 +16,57 @@ const Profile = props => {
       <div style={{ backgroundImage: `url(${image})` }} className={styles.image} />
       <div className={styles.card}>
         <h2 className={styles.name}>{name}</h2>
-        <p className={styles.item}>{locationDetails}</p>
-        <p className={styles.item}>{countryDetails}</p>
+        {locationAndCountry(location, country)}
       </div>
 
-      <Button
-        href={websiteUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        style={{
-          backgroundColor: "#626BEB",
-          borderRadius: 99,
-          gridColumn: "1 / -1",
-          marginTop: "5px",
-          marginBottom: "16px",
-          maxWidth: "180px"
-        }}
-      >
-        <span className={styles.linkText}>Visit the maker</span>
-      </Button>
+      <div className={styles.profileButtonContainer}>
+        <Button
+          href={websiteUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: "block",
+            backgroundColor: "#626BEB",
+            borderRadius: 99,
+            gridColumn: "1 / -1",
+            marginTop: "5px",
+            marginBottom: "16px",
+            maxWidth: "180px"
+          }}
+        >
+          <span className={styles.linkText}>Visit the maker</span>
+        </Button>
+      </div>
     </a>
   );
 };
+
+function locationAndCountryText(location, country) {
+  if (location && country) {
+    return `${location}, ${country}`;
+  } else if (location) {
+    return location;
+  } else if (country) {
+    return country;
+  } else {
+    return "";
+  }
+}
+
+function locationAndCountry(location, country) {
+  if (location || country) {
+    return (
+      <p className={styles.item} style={{
+        textIndent: "-20px",
+        paddingLeft: "20px"
+      }}>
+        <MapIcon style={{ marginBottom: "-2px", marginRight: "2px" }} size={14} />
+        {locationAndCountryText(location, country)}
+      </p>
+    );
+  } else {
+    return null;
+  }
+}
 
 export default Profile;
