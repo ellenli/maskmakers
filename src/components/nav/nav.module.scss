@@ -6,18 +6,6 @@
   font-family: $pt-mono;
   color: var(--text);
   background-color: transparent;
-  // a:focus,
-  // button:focus {
-  //   outline: none;
-  //   border-radius: 1px;
-  //   box-shadow: var(--background) 0px 0px 0px 2px, var(--text) 0px 0px 0px 3px;
-  //   text-decoration: none;
-  //   svg {
-  //     box-shadow: var(--background) 0px 0px 0px 5px, var(--text) 0px 0px 0px 6px;
-  //     outline: none;
-  //     border-radius: 1px;
-  //   }
-  // }
 }
 
 .logo {
@@ -26,7 +14,7 @@
 }
 
 .links {
-  padding-top: 24px;
+  padding-top: 14px;
 }
 
 .link {

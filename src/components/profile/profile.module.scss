@@ -7,7 +7,7 @@
   grid-gap: 0rem 1rem;
   overflow-x: hidden;
   font-family: $pt-mono;
-  --profile-theme-color: var(--gray);
+  --profile-theme-color: #6362fc;
   font-size: 16px;
   border-radius: 20px;
   border: 5px solid #fce0d7;
@@ -98,12 +98,9 @@
 }
 
 .linkText {
-  display: inline-grid;
-  grid-auto-flow: column;
-  grid-gap: 8px;
-  align-items: center;
-  line-height: 0;
   text-transform: initial;
   font-weight: 600;
   font-family: $pitch;
+  position: relative;
+  top: 1px;
 }

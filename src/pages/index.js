@@ -75,7 +75,7 @@ const App = () => {
 
   const filterCategoryTypes = [
     { name: "Country", id: "country" },
-    { name: "Location", id: "location" }
+    { name: "City/state", id: "location" }
   ];
 
   // dynamically create categories from location and country fields in database
