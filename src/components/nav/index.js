@@ -18,7 +18,7 @@ const Nav = () => {
         </Link>
       </nav>
       <nav className={styles.links}>
-        <Link to="/nominate" className={styles.link}>
+        <Link to="https://airtable.com/shrwyYwx7xdJZTU8Z" target="_blank" className={styles.link}>
           Add a mask maker
         </Link>
       </nav>
