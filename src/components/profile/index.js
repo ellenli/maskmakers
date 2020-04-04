@@ -1,11 +1,10 @@
 import React from "react";
 import MapIcon from "../../icons/map";
-import BriefcaseIcon from "../../icons/briefcase";
 import styles from "./profile.module.scss";
 import Button from "../button";
 
 const Profile = props => {
-  const { image, name, location, websiteUrl } = props;
+  const { image, name, location, country, websiteUrl } = props;
 
   return (
 

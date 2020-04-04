@@ -40,18 +40,23 @@
 .pageTitle {
   font-size: 32px;
   font-weight: 700;
-  margin-bottom: 32px;
-  color: #f17f5c;
+  margin-bottom: 76px;
 }
 
-.aboutContainer {
+.questionContainer {
   margin-bottom: 50px;
-  max-width: 510px;
 }
 
-.about {
-  font-size: 16px;
-  line-height: 18px;
+.question {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 29px;
   padding-bottom: 16px;
   margin-bottom: 37px;
+  border-bottom: 5px dashed $secondary-orange;
+}
+
+.answer {
+  font-size: 16px;
+  line-height: 18px;
 }
