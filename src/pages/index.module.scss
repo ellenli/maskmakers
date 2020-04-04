@@ -138,8 +138,6 @@
   bottom: 64px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: $primary-purple;
-  border-radius: 8px;
   @media (min-width: $desktop) {
     display: none;
   }

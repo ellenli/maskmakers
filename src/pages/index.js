@@ -309,7 +309,16 @@ const App = () => {
                 </button>
               </div>
               <div className={styles.filterButtonContainer}>
-                <Button type="button" onClick={open} fullWidth={false}>
+                <Button
+                  type="button"
+                  onClick={open}
+                  fullWidth={false}
+                  style={{
+                    backgroundColor: "#6362fc",
+                    borderRadius: "8px",
+                    boxShadow: "2px 4px 10px rgba(0, 0, 0, 0.2)"
+                  }}
+                >
                   <FilterIcon /> Filter
                   {selectedFilters.length > 0 && (
                     <>
