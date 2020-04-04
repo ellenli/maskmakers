@@ -41,6 +41,7 @@ const App = () => {
               websiteUrl
               location
               country
+              show
               photo {
                 url
               }
@@ -80,7 +81,6 @@ const App = () => {
   // dynamically create categories from location and country fields in database
   // if this ever causes issue, revert back to manual creation of these categories
   // ---
-  console.log("EEEH");
   data.allAirtable.locations.map(location => {
     const category = createCategory(location.fieldValue, "location", location.totalCount);
     return categories.push(category);
@@ -206,13 +206,16 @@ const App = () => {
                   }
 
                   const { recordId } = designer;
-                  const { name, websiteUrl, location, photo } = designer.data;
+                  const {
+                    name,
+                    websiteUrl,
+                    location,
+                    country,
+                    show,
+                    photo
+                  } = designer.data;
 
-                  if (
-                    recordId == null ||
-                    designer == null ||
-                    designer.data.name == null
-                  ) {
+                  if (recordId == null || designer == null || !show) {
                     return null;
                   }
 
@@ -223,6 +226,7 @@ const App = () => {
                       name={name}
                       description={designer.data.description}
                       location={location}
+                      country={country}
                       websiteUrl={websiteUrl}
                     />
                   );
@@ -394,76 +398,3 @@ const App = () => {
 };
 
 export default App;
-
-// export const pageQuery = graphql`
-//   query Index {
-//     site {
-//       siteMetadata {
-//         title
-//       }
-//     }
-//   }
-// `;
-
-/*
-    allTwitterProfile {
-      edges {
-        node {
-          localFile {
-            childImageSharp {
-              sizes(grayscale: true, maxWidth: 200) {
-                sizes
-                aspectRatio
-                src
-                srcSet
-              }
-            }
-          }
-          profile {
-            description
-            name
-            screen_name
-            location
-            profile_image_url_https
-            profile_link_color
-            tags {
-              art
-              austin
-              author
-              ba
-              ceo
-              content
-              creative
-              developer
-              director
-              engineer
-              founder
-              freelance
-              graphic
-              head
-              illustrator
-              la
-              lead
-              letter
-              london
-              manager
-              nyc
-              portland
-              product
-              research
-              toronto
-              typeface
-              seattle
-              speaker
-              systems
-              ux
-              vancouver
-              vp
-              web
-              writer
-            }
-          }
-        }
-      }
-    }
-*/

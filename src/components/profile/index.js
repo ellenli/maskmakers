@@ -1,11 +1,10 @@
 import React from "react";
 import MapIcon from "../../icons/map";
-import BriefcaseIcon from "../../icons/briefcase";
 import styles from "./profile.module.scss";
 import Button from "../button";
 
 const Profile = props => {
-  const { image, name, location, websiteUrl } = props;
+  const { image, name, location, country, websiteUrl } = props;
 
   return (
     <div
@@ -20,6 +19,10 @@ const Profile = props => {
         <p className={styles.item}>
           <MapIcon style={{ marginBottom: "-2px", marginRight: "2px" }} size={14} />
           {location}
+        </p>
+        <p className={styles.item}>
+          <MapIcon style={{ marginBottom: "-2px", marginRight: "2px" }} size={14} />
+          {country}
         </p>
 
         <Button
