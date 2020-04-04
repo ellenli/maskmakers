@@ -27,11 +27,12 @@ const Profile = props => {
           style={{
             display: "block",
             backgroundColor: "#626BEB",
-            borderRadius: 99,
+            borderRadius: 8,
             gridColumn: "1 / -1",
             marginTop: "5px",
             marginBottom: "16px",
-            maxWidth: "180px"
+            maxWidth: "150px",
+            padding: "0"
           }}
         >
           <span className={styles.linkText}>Visit the maker</span>
