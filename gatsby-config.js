@@ -2,12 +2,6 @@ require("dotenv").config();
 
 module.exports = {
   plugins: [
-    // {
-    //   resolve: "gatsby-source-seeker",
-    //   options: {
-    //     key: process.env.WWD_SEEKER_KEY
-    //   }
-    // },
     {
       resolve: `gatsby-plugin-sass`,
       options: {
