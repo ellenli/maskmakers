@@ -98,6 +98,7 @@
   color: var(--text);
   line-height: 1;
   border-radius: 2px;
+  color: $primary-purple;
 }
 
 .pageNumberButton:disabled {
@@ -105,6 +106,7 @@
   --text: white;
   --background: var(--gray);
   background-color: $primary-purple;
+  color: #fff;
 }
 
 .pageNumberButton:not(:disabled) {
@@ -124,6 +126,7 @@
 }
 
 .paginationArrow {
+  color: $primary-purple;
   composes: arrow pageNumberButton;
 }
 .paginationArrow:disabled {
