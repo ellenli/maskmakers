@@ -18,26 +18,6 @@ const Profile = props => {
         <h2 className={styles.name}>{name}</h2>
         {locationAndCountry(location, country)}
       </div>
-
-      <div className={styles.profileButtonContainer}>
-        <Button
-          href={websiteUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: "block",
-            backgroundColor: "#626BEB",
-            borderRadius: 8,
-            gridColumn: "1 / -1",
-            marginTop: "5px",
-            marginBottom: "16px",
-            maxWidth: "150px",
-            padding: "0"
-          }}
-        >
-          <span className={styles.linkText}>Visit the maker</span>
-        </Button>
-      </div>
     </a>
   );
 };
