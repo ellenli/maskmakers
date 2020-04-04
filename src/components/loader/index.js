@@ -6,8 +6,7 @@ const Loader = () => {
     <div className={styles.container}>
       <div>
         <h1 className={styles.heading}>
-          Women Who Design is a Twitter directory of accomplished women in the
-          design industry
+          Mask Makers Club is a global collective of mask makers. #MaskOn
         </h1>
         <div className={styles.spinner} />
       </div>

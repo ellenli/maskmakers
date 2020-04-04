@@ -6,18 +6,18 @@
   font-family: $pt-mono;
   color: var(--text);
   background-color: var(--background);
-  a:focus,
-  button:focus {
-    outline: none;
-    border-radius: 1px;
-    box-shadow: var(--background) 0px 0px 0px 2px, var(--text) 0px 0px 0px 3px;
-    text-decoration: none;
-    svg {
-      box-shadow: var(--background) 0px 0px 0px 5px, var(--text) 0px 0px 0px 6px;
-      outline: none;
-      border-radius: 1px;
-    }
-  }
+  // a:focus,
+  // button:focus {
+  //   outline: none;
+  //   border-radius: 1px;
+  //   box-shadow: var(--background) 0px 0px 0px 2px, var(--text) 0px 0px 0px 3px;
+  //   text-decoration: none;
+  //   svg {
+  //     box-shadow: var(--background) 0px 0px 0px 5px, var(--text) 0px 0px 0px 6px;
+  //     outline: none;
+  //     border-radius: 1px;
+  //   }
+  // }
 }
 
 .logo {
@@ -31,27 +31,30 @@
 
 .link {
   display: inline-block;
-  font-size: 13px;
+  font-size: 14px;
   text-decoration: none;
   font-weight: 600;
-  color: $primary-purple;
+  color: #E18C6C;
   position: relative;
-  margin-right: 20px;
+  margin-right: 8px;
   background-color: transparent;
   border: none;
-  padding: 0;
+  padding: 8px 12px 7px 12px;
   cursor: pointer;
+  border-radius: 8px;
+  background-color: #fcece6;
   font-family: $pt-mono;
   &:hover {
-    text-decoration: underline;
+    text-decoration: none;
+    background-color: #fcdfd4;
   }
 }
 
-.link::after {
-  content: "·";
-  position: absolute;
-  right: -15px;
-}
+// .link::after {
+//   content: "·";
+//   position: absolute;
+//   right: -15px;
+// }
 
 .link:last-child::after {
   display: none;

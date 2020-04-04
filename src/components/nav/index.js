@@ -14,12 +14,12 @@ const Nav = () => {
           FAQ
         </Link>
         <Link to="/about" className={styles.link}>
-          About
+          About us
         </Link>
       </nav>
       <nav className={styles.links}>
         <Link to="/nominate" className={styles.link}>
-          List your business
+          Add a mask maker
         </Link>
       </nav>
     </div>

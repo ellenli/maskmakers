@@ -74,8 +74,8 @@ const App = () => {
   const profileContainerRef = useRef();
 
   const filterCategoryTypes = [
-    { name: "Location (Country)", id: "country" },
-    { name: "Location (City)", id: "location" }
+    { name: "Country", id: "country" },
+    { name: "Location", id: "location" }
   ];
 
   // dynamically create categories from location and country fields in database
