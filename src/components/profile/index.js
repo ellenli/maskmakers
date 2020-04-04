@@ -56,10 +56,13 @@ function locationAndCountryText(location, country) {
 function locationAndCountry(location, country) {
   if (location || country) {
     return (
-      <p className={styles.item} style={{
-        textIndent: "-20px",
-        paddingLeft: "20px"
-      }}>
+      <p
+        className={styles.item}
+        style={{
+          textIndent: "-20px",
+          paddingLeft: "20px"
+        }}
+      >
         <MapIcon style={{ marginBottom: "-2px", marginRight: "2px" }} size={14} />
         {locationAndCountryText(location, country)}
       </p>

@@ -104,6 +104,7 @@
   font-weight: 500;
   --text: white;
   --background: var(--gray);
+  background-color: $primary-purple;
 }
 
 .pageNumberButton:not(:disabled) {

@@ -44,16 +44,16 @@ module.exports = {
       }
     },
     {
-      resolve: 'gatsby-source-airtable',
+      resolve: "gatsby-source-airtable",
       options: {
         apiKey: process.env.AIRTABLE_API_KEY,
         concurrency: 5,
         tables: [
           {
-            baseId: 'appWCcQ2UsrJFIHsp',
-            tableName: 'providers'
+            baseId: "appWCcQ2UsrJFIHsp",
+            tableName: "test(pagination)"
           }
-        ],
+        ]
       }
     }
   ],
