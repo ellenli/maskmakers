@@ -15,26 +15,33 @@
 
 .links {
   padding-top: 24px;
+  display: block;
 }
 
 .link {
   display: inline-block;
   font-size: 14px;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 800;
   color: #fff;
   position: relative;
-  margin-right: 8px;
-  margin-bottom: 8px;
   border: none;
   padding: 8px 12px 7px 12px;
-  cursor: pointer;
   border-radius: 8px;
   background-color: $primary-purple;
   font-family: $pt-mono;
+  box-shadow: 0px 3px 0px 0px rgba(98, 107, 235, 0.4);
+  margin: 0px 8px 2px 0px;
+  transition: all 0.05s;
   &:hover {
     text-decoration: none;
+    box-shadow: 0px 2px 0px 0px rgba(98, 107, 235, 0.7);
+    margin: 2px 8px 0px 0px;
+  }
+  &:active {
     background-color: #414ad1;
+    box-shadow: 0px 2px 0px 0px rgba(98, 107, 235, 0.8);
+    margin: 2px 8px 0px 0px;
   }
 }
 
