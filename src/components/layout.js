@@ -5,18 +5,18 @@ import "../styles/index.scss";
 const Layout = ({ children }) => (
   <>
     <Helmet
-      title="Women Who Design"
+      title="Mask Makers Club"
       meta={[
         {
           property: "description",
           content:
-            "A Twitter directory of accomplished women in the design industry."
+            "A global collective of mask makers. #MaskOn"
         },
-        { property: "og:title", content: "Women Who Design" },
+        { property: "og:title", content: "Mask Makers Club" },
         {
           property: "og:description",
           content:
-            "A Twitter directory of accomplished women in the design industry."
+            "A global collective of mask makers. #MaskOn"
         },
 
         {
@@ -25,12 +25,12 @@ const Layout = ({ children }) => (
         },
         {
           property: "og:url",
-          content: "https://womenwho.design"
+          content: "https://maskmakers.club"
         },
         { property: "og:type", content: "website" },
-        { property: "og:site_name", content: "Women Who Design" },
-        { property: "twitter:site", content: "@womenwhodesign" },
-        { property: "twitter:creator", content: "@julesforrest" },
+        { property: "og:site_name", content: "Mask Makers Club" },
+        { property: "twitter:site", content: "@maskmakersclub" },
+        { property: "twitter:creator", content: "@ellenxli" },
         { property: "twitter:card", content: "summary_large_image" },
         {
           property: "twitter:image",
