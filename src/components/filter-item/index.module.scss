@@ -5,6 +5,7 @@
   user-select: none;
   background-color: var(--background);
   color: var(--text);
+  text-transform: capitalize;
 
   &Pill {
     font-size: 13px;
