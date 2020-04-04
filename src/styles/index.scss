@@ -19,12 +19,7 @@
   --page-shell-padding: 24px;
   --sidebar: 310px;
   --sidebar-height: 208px;
-  --element-height: 52px;
 
-  @media (min-width: $desktop) {
-    --page-shell-padding: 32px;
-    --element-height: 44px;
-  }
   color: var(--gray);
   background-color: var(--background);
 }
