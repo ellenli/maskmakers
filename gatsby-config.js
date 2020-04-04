@@ -51,7 +51,7 @@ module.exports = {
         tables: [
           {
             baseId: "appWCcQ2UsrJFIHsp",
-            tableName: "test(pagination)"
+            tableName: "providers"
           }
         ]
       }

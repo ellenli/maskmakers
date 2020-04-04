@@ -9,10 +9,8 @@
   --profile-theme-color: #6362fc;
   font-size: 16px;
   border-radius: 20px;
-  border: 1px solid #fce0d7;
+  border: 5px solid #fce0d7;
   text-decoration: none;
-
-  transition: all 0.3s;
 
   svg {
     color: var(--profile-theme-color);
@@ -67,7 +65,6 @@
   flex: 1 1 auto;
   background-color: #fff;
   padding: 15px;
-  padding-bottom: 10px;
 }
 
 .name {
@@ -102,7 +99,7 @@
   }
 }
 .profile:hover {
-  box-shadow: 0 3px 3px -2px $secondary-orange;
+  border: 5px solid #f5bba6;
 }
 
 .linkText {

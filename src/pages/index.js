@@ -32,7 +32,7 @@ const App = () => {
 
   const data = useStaticQuery(graphql`
     {
-      allAirtable(filter: { table: { eq: "test(pagination)" } }) {
+      allAirtable(filter: { table: { eq: "providers" } }) {
         edges {
           node {
             recordId
