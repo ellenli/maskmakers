@@ -13,9 +13,9 @@ const Nav = () => {
         <Link to="/about" className={styles.link}>
           About us
         </Link>
-        <Link to="https://airtable.com/shrwyYwx7xdJZTU8Z" target="_blank" className={styles.link}>
+        <a href="https://airtable.com/shrwyYwx7xdJZTU8Z" target="_blank" className={styles.link}>
           Add a mask maker
-        </Link>
+        </a>
       </nav>
     </div>
   );
