@@ -13,15 +13,55 @@ const About = () => (
         <Nav theme="light" />
       </div>
       <div className={styles.main}>
-        <h1 className={styles.pageTitle}>About Mask Maker Club</h1>
+        <h1 className={styles.pageTitle}>About the club</h1>
         <div className={styles.aboutContainer}>
           <p className={styles.about}>
-            Business owners like you are the heart of Shopify, and we always want to do
-            everything in our power to support you. Read on to learn about the actions
-            we’re taking, get answers to your questions, and access resources to help you
-            navigate your business during this challenging time.
+            Mask Makers Club is a global collective of mask makers. We are sewists, makers, and helpers, united in a mission to slow the spread of COVID-19 by supporting local communities and celebrating entrepreneurship for social good.<br /><br />
+
+            Wear a mask. <a href="/">Support a maker</a>.
           </p>
+          <h2 className={styles.subheading}>Why wear a mask?</h2>
+          <p className={styles.about}>
+            There are 3 simple reasons to wear a mask:<br />
+            1. Protect others by not spreading COVID-19 if you have it.<br />
+2. Protect yourself by reducing your chances of catching COVID-19 when you go outside.<br />
+3. Reduce face touching by wearing something that covers your face.<br />
+<br />
+Learn more at <a href="https://masks4all.co/" target="_blank">masks4all</a>.
+          </p>
+          <h2 className={styles.subheading}>How do I join the club?</h2>
+          <p className={styles.about}>
+            To join the club as a mask maker, or to add a mask maker you know, <a href="https:/airtable.com/shrwyYwx7xdJZTU8Z" target="_blank">complete this simple form</a>. Mask makers are added every couple hours.
+          </p>
+          <h2 className={styles.subheading}>How do I leave the club?</h2>
+          <p className={styles.about}>
+            If you've been featured in the club and you'd rather not be, please contact us and you will be removed.
+          </p>
+          <h2 className={styles.subheading}>Contact us</h2>
+<p className={styles.about}>
+You can contact us through <a href="https://instagram.com/maskmakersclub" target="_blank">Instagram</a>, <a href="https://twitter.com/maskmakersclub" target="_blank">Twitter</a>, or good ol' email: <a href="mailto:hello@maskmakers.club">hello@maskmakers.club</a>.
+</p>
         </div>
+        <h1 className={styles.pageTitle}>About the project</h1>
+      <div className={styles.aboutContainer}>
+        <p className={styles.about}>
+          Mask Makers Club is a no-profit project founded by <a href="" target="_blank">Ellen</a> with help and support from friends and organizations around the world.</p>
+
+          {/*
+
+          <h2 className={styles.subheading}>Sponsors and partners</h2>
+                    <p className={styles.about}>
+                      We are proud to work with <a href="https://twitter.com/makerfestivalto" target="_blank">Maker Festival</a>, <a href="https://masks4all.co/" target="_blank">masks4all</a>, and <a href="https://www.instagram.com/lovetosew.podcast/" target="_blank">Love to Sew</a> to bring this project to the world.
+                      </p>
+
+          */}
+<h2 className={styles.subheading}>Team</h2>
+          <p className={styles.about}>
+            Art and design by <a href="" target="_blank">Andrey</a>, <a href="" target="_blank">Jessica</a>, <a href="" target="_blank">Kristine</a>, and <a href="" target="_blank">Joelle</a>. Marketing by <a href="" target="_blank">Carl</a>. Development by <a href="" target="_blank">Hassan</a>, <a href="" target="_blank">Luke</a>, <a href="" target="_blank">Kasra</a>, and <a href="" target="_blank">Ben</a>. Our source code is <a href="https://github.com/ellenli/maskmakers/" target="_blank">on GitHub</a>.
+            </p>
+</div>
+
+
       </div>
     </div>
   </Layout>

@@ -12,7 +12,7 @@
 .main {
   position: static;
   overflow-y: scroll;
-  background-color: $primary-orange;
+  background-color: var(--white);
   padding: 64px var(--page-shell-padding) 64px var(--page-shell-padding);
   transition: all 0.5s ease;
   width: 100%;
@@ -25,7 +25,7 @@
 
 .sidebar {
   overflow-y: scroll;
-  background-color: var(--white);
+  background-color: $primary-orange;
 
   @media (min-width: $desktop) {
     min-width: var(--sidebar);
@@ -37,11 +37,17 @@
   }
 }
 
-.pageTitle {
+h1.pageTitle {
   font-size: 32px;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 32px;
-  color: #f17f5c;
+  color: $primary-purple;
+}
+h2.subheading {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 18px;
+  color: $primary-purple;
 }
 
 .aboutContainer {
@@ -50,8 +56,12 @@
 }
 
 .about {
-  font-size: 16px;
-  line-height: 18px;
+  font-size: 18px;
+  line-height: 24px;
   padding-bottom: 16px;
   margin-bottom: 37px;
+}
+
+a {
+  color: $primary-orange;
 }
