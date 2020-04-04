@@ -27,11 +27,12 @@ const Profile = props => {
           style={{
             display: "block",
             backgroundColor: "#626BEB",
-            borderRadius: 99,
+            borderRadius: 8,
             gridColumn: "1 / -1",
             marginTop: "5px",
             marginBottom: "16px",
-            maxWidth: "180px"
+            maxWidth: "150px",
+            padding: "0"
           }}
         >
           <span className={styles.linkText}>Visit the maker</span>
@@ -56,10 +57,13 @@ function locationAndCountryText(location, country) {
 function locationAndCountry(location, country) {
   if (location || country) {
     return (
-      <p className={styles.item} style={{
-        textIndent: "-20px",
-        paddingLeft: "20px"
-      }}>
+      <p
+        className={styles.item}
+        style={{
+          textIndent: "-20px",
+          paddingLeft: "20px"
+        }}
+      >
         <MapIcon style={{ marginBottom: "-2px", marginRight: "2px" }} size={14} />
         {locationAndCountryText(location, country)}
       </p>

@@ -99,7 +99,7 @@ const App = () => {
   }, [data.allAirtable.edges]);
 
   const numDesignersPerPage = 52;
-  const numPagesToShowInPagination = 5;
+  const numPagesToShowInPagination = 10;
 
   const filteredDesigners = visibleDesigners.filter(designer => {
     if (selectedFilters.length === 0) {
