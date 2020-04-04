@@ -27,9 +27,7 @@ const FilterItem = ({ isChecked, onChange, title, id, type, count }) => {
         className={styles.input}
       />
       <label htmlFor={id} className={labelStyles}>
-        {type === "row" && (
-          <>{isChecked ? <SquareCheckIcon /> : <SquareIcon />}</>
-        )}
+        {type === "row" && <>{isChecked ? <SquareCheckIcon /> : <SquareIcon />}</>}
         <span className={styles.labelTitle}>{title}</span>
         {type === "row" && <span className={styles.count}>{count}</span>}
       </label>

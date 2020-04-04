@@ -27,8 +27,16 @@ const createCategory = (value, type, count) => {
   };
 };
 
+const createLocationInCountry = (location, country) => {
+  return {
+    location: location.toLowerCase(),
+    country: country.toLowerCase()
+  };
+};
+
 const App = () => {
   const categories = [];
+  const countryAndLocations = [];
 
   const data = useStaticQuery(graphql`
     {
@@ -75,7 +83,7 @@ const App = () => {
 
   const filterCategoryTypes = [
     { name: "Country", id: "country" },
-    { name: "Location", id: "location" }
+    { name: "City/state", id: "location" }
   ];
 
   // dynamically create categories from location and country fields in database
@@ -89,6 +97,17 @@ const App = () => {
   data.allAirtable.countries.map(country => {
     const category = createCategory(country.fieldValue, "country", country.totalCount);
     return categories.push(category);
+  });
+  // ---
+
+  // create hash and relationship of countries and locations within countries
+  // ---
+  data.allAirtable.edges.map(edge => {
+    const { location, country } = edge.node.data;
+
+    if (location && country) {
+      return countryAndLocations.push(createLocationInCountry(location, country));
+    }
   });
   // ---
 
@@ -147,10 +166,27 @@ const App = () => {
                 categoriesInSection,
                 category => category.title
               );
+
+              if (!selectedFilters.length && section.id === "location") {
+                return null;
+              }
+
               return (
                 <div key={section.id}>
                   <h3 className={styles.filterCategoryTitle}>{section.name}</h3>
                   {sortedCategoriesInSection.map(category => {
+                    const selectedCountry = selectedFilters[0];
+
+                    if (category.location) {
+                      const countryAndLocationObj = countryAndLocations.find(
+                        obj => obj.location === category.id
+                      );
+
+                      if (countryAndLocationObj.country !== selectedCountry) {
+                        return null;
+                      }
+                    }
+
                     return (
                       <FilterItem
                         key={category.id}
