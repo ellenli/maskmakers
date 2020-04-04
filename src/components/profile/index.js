@@ -3,25 +3,6 @@ import MapIcon from "../../icons/map";
 import styles from "./profile.module.scss";
 import Button from "../button";
 
-const Profile = props => {
-  const { image, name, location, country, websiteUrl } = props;
-
-  return (
-    <a
-      className={styles.profile}
-      href={websiteUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <div style={{ backgroundImage: `url(${image})` }} className={styles.image} />
-      <div className={styles.card}>
-        <h2 className={styles.name}>{name}</h2>
-        {locationAndCountry(location, country)}
-      </div>
-    </a>
-  );
-};
-
 function locationAndCountryText(location, country) {
   if (location && country) {
     return `${location}, ${country}`;
@@ -48,9 +29,28 @@ function locationAndCountry(location, country) {
         {locationAndCountryText(location, country)}
       </p>
     );
-  } else {
-    return null;
   }
+
+  return null;
 }
+
+const Profile = props => {
+  const { image, name, location, country, websiteUrl } = props;
+
+  return (
+    <a
+      className={styles.profile}
+      href={websiteUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <div style={{ backgroundImage: `url(${image})` }} className={styles.image} />
+      <div className={styles.card}>
+        <h2 className={styles.name}>{name}</h2>
+        {locationAndCountry(location, country)}
+      </div>
+    </a>
+  );
+};
 
 export default Profile;
