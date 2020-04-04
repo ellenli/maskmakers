@@ -65,3 +65,12 @@ h2.subheading {
 a {
   color: $primary-orange;
 }
+
+ol {
+  list-style: decimal!important;
+  list-style-type: decimal!important;
+  margin-left: 28px!important;
+}
+li {
+  padding: 16px 0px 0px 16px !important;
+}

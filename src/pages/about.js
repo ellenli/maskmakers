@@ -22,10 +22,12 @@ const About = () => (
           </p>
           <h2 className={styles.subheading}>Why wear a mask?</h2>
           <p className={styles.about}>
-            There are 3 simple reasons to wear a mask:<br />
-            1. Protect others by not spreading COVID-19 if you have it.<br />
-2. Protect yourself by reducing your chances of catching COVID-19 when you go outside.<br />
-3. Reduce face touching by wearing something that covers your face.<br />
+            There are 3 simple reasons to wear a mask:
+<ol type="1">
+  <li>Protect others by not spreading COVID-19 if you have it</li>
+  <li>Protect yourself by reducing your chances of catching COVID-19 when you go outside</li>
+  <li>Reduce face touching by wearing something that covers your face</li>
+</ol>
 <br />
 Learn more at <a href="https://masks4all.co/" target="_blank">masks4all</a>.
           </p>
