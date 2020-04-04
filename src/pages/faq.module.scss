@@ -1,0 +1,62 @@
+@import "../styles/variables.scss";
+
+.container {
+  overflow-x: hidden;
+  font-family: $graphik;
+
+  @media (min-width: $desktop) {
+    display: flex;
+  }
+}
+
+.main {
+  position: static;
+  overflow-y: scroll;
+  background-color: $primary-orange;
+  padding: var(--page-shell-padding);
+  transition: all 0.5s ease;
+  width: 100%;
+  color: $primary-purple;
+  font-family: $pt-mono;
+  @media (min-width: $desktop) {
+    height: 100vh;
+  }
+}
+
+.sidebar {
+  overflow-y: scroll;
+  background-color: var(--white);
+
+  @media (min-width: $desktop) {
+    min-width: var(--sidebar);
+    width: var(--sidebar);
+    max-width: var(--sidebar);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.pageTitle {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 76px;
+}
+
+.questionContainer {
+  margin-bottom: 50px;
+}
+
+.question {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 29px;
+  padding-bottom: 16px;
+  margin-bottom: 37px;
+  border-bottom: 5px dashed $secondary-orange;
+}
+
+.answer {
+  font-size: 16px;
+  line-height: 18px;
+}
