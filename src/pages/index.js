@@ -123,6 +123,261 @@ const App = () => {
     numPagesToShowInPagination
   );
 
+  // ideally these should all be their own components
+  const categoryFilters = (
+    <div
+      className={classnames({
+        [styles.filterContainer]: true,
+        [styles.filterListVisible]: isFilterListVisible
+      })}
+    >
+      {filterCategoryTypes.map(section => {
+        const categoriesInSection = categories.filter(c => c[section.id]);
+        const sortedCategoriesInSection = sortBy(
+          categoriesInSection,
+          category => category.title
+        );
+        return (
+          <div key={section.id}>
+            <h3 className={styles.filterCategoryTitle}>{section.name}</h3>
+            {sortedCategoriesInSection.map(category => {
+              return (
+                <FilterItem
+                  key={category.id}
+                  id={category.id}
+                  type="row"
+                  onChange={e => {
+                    const categoryId = e.target.value;
+                    const isChecked = e.target.checked;
+
+                    const newSelectedFilters = [...selectedFilters];
+
+                    if (isChecked) {
+                      newSelectedFilters.push(categoryId);
+                    } else {
+                      const i = newSelectedFilters.indexOf(categoryId);
+                      newSelectedFilters.splice(i, 1);
+                    }
+
+                    setSelectedFilters(newSelectedFilters);
+                    setCurrentPage(1);
+                  }}
+                  isChecked={selectedFilters.includes(category.id)}
+                  className={styles.filterItemInput}
+                  title={category.title}
+                  count={category.count}
+                />
+              );
+            })}
+          </div>
+        );
+      })}
+    </div>
+  );
+
+  const pageBody = (
+    <>
+      <div
+        className={classnames({
+          [styles.profiles]: true
+        })}
+      >
+        {filteredDesigners.map(({ node: designer }, i) => {
+          if (i < pagination.startIndex || i > pagination.endIndex) {
+            return null;
+          }
+
+          const { recordId } = designer;
+          const { name, websiteUrl, location, country, show, photo } = designer.data;
+
+          if (recordId == null || designer == null || !show) {
+            return null;
+          }
+
+          return (
+            <Profile
+              key={designer.recordId}
+              image={photo[0].url}
+              name={name}
+              description={designer.data.description}
+              location={location}
+              country={country}
+              websiteUrl={websiteUrl}
+            />
+          );
+        })}
+      </div>
+
+      <div className={styles.paginationContainer}>
+        <button
+          onClick={() => {
+            setCurrentPage(currentPage - 1);
+            profileContainerRef.current.scrollTo(0, 0);
+          }}
+          disabled={pagination.currentPage === pagination.startPage}
+          type="button"
+          className={styles.paginationArrow}
+        >
+          ←
+        </button>
+        <button
+          className={styles.pageNumberButton}
+          onClick={() => {
+            setCurrentPage(1);
+            profileContainerRef.current.scrollTo(0, 0);
+          }}
+          type="button"
+          disabled={pagination.currentPage === 1}
+        >
+          1
+        </button>
+        {currentPage >= numPagesToShowInPagination && <>&hellip;</>}
+        {pagination.pages.map(pageNumber => {
+          // Skip over these page numbers because they'll always appear
+          // in the pagination.
+          if (pageNumber === 1 || pageNumber === pagination.totalPages) {
+            return null;
+          }
+
+          return (
+            <button
+              key={pageNumber}
+              className={styles.pageNumberButton}
+              onClick={() => {
+                setCurrentPage(pageNumber);
+                profileContainerRef.current.scrollTo(0, 0);
+              }}
+              disabled={pagination.currentPage === pageNumber}
+              type="button"
+            >
+              {pageNumber}
+            </button>
+          );
+        })}
+        {currentPage <= pagination.totalPages - (numPagesToShowInPagination + 1) && (
+          <>&hellip;</>
+        )}
+        {pagination.totalPages !== 1 && (
+          <button
+            className={styles.pageNumberButton}
+            onClick={() => {
+              setCurrentPage(pagination.totalPages);
+              profileContainerRef.current.scrollTo(0, 0);
+            }}
+            type="button"
+            disabled={pagination.currentPage === pagination.totalPages}
+          >
+            {pagination.totalPages}
+          </button>
+        )}
+        <button
+          onClick={() => {
+            setCurrentPage(currentPage + 1);
+            profileContainerRef.current.scrollTo(0, 0);
+          }}
+          disabled={pagination.currentPage === pagination.endPage}
+          type="button"
+          className={styles.paginationArrow}
+        >
+          →
+        </button>
+      </div>
+      <div className={styles.filterButtonContainer}>
+        <Button
+          type="button"
+          onClick={open}
+          fullWidth={false}
+          style={{
+            backgroundColor: "#6362fc",
+            borderRadius: "8px",
+            boxShadow: "2px 4px 10px rgba(0, 0, 0, 0.2)"
+          }}
+        >
+          <FilterIcon /> Filter
+          {selectedFilters.length > 0 && (
+            <>
+              <span>·</span> <span>{selectedFilters.length}</span>
+            </>
+          )}
+        </Button>
+      </div>
+    </>
+  );
+
+  const dialogOverlay = (
+    <div>
+      <DialogOverlay isOpen={showDialog} onDismiss={close}>
+        <DialogContent>
+          <div className={styles.dialogHeader}>
+            <ClickableBox className={styles.closeButton} onClick={close}>
+              <span aria-hidden>
+                <CloseIcon />
+              </span>
+            </ClickableBox>
+            <h2>Filter</h2>
+            <button
+              onClick={() => {
+                setSelectedFilters([]);
+                setCurrentPage(1);
+              }}
+              className={styles.filterClear}
+              type="button"
+              style={{ marginRight: "16px" }}
+            >
+              Clear
+            </button>
+          </div>
+          <div className={styles.dialogBody}>
+            {filterCategoryTypes.map(section => {
+              const categoriesInSection = categories.filter(c => c[section.id]);
+              const sortedCategoriesInSection = sortBy(
+                categoriesInSection,
+                category => category.title
+              );
+
+              return (
+                <div key={section.id}>
+                  <h3 className={styles.filterCategoryTitle}>{section.name}</h3>
+                  {sortedCategoriesInSection.map(category => (
+                    <FilterItem
+                      key={category.id}
+                      id={category.id}
+                      type="pill"
+                      onChange={e => {
+                        const categoryId = e.target.value;
+                        const isChecked = e.target.checked;
+
+                        const newSelectedFilters = [...selectedFilters];
+
+                        if (isChecked) {
+                          newSelectedFilters.push(categoryId);
+                        } else {
+                          const i = newSelectedFilters.indexOf(categoryId);
+                          newSelectedFilters.splice(i, 1);
+                        }
+
+                        setSelectedFilters(newSelectedFilters);
+                        setCurrentPage(1);
+                      }}
+                      isChecked={selectedFilters.includes(category.id)}
+                      className={styles.filterItemInput}
+                      title={category.title}
+                    />
+                  ))}
+                </div>
+              );
+            })}
+          </div>
+          <div className={styles.dialogFooter}>
+            <Button type="button" onClick={close}>
+              View {filteredDesigners.length} designers
+            </Button>
+          </div>
+        </DialogContent>
+      </DialogOverlay>
+    </div>
+  );
+
   return (
     <Layout>
       <div className={styles.container}>
@@ -135,54 +390,7 @@ const App = () => {
             isLoading={isLoading}
           />
 
-          <div
-            className={classnames({
-              [styles.filterContainer]: true,
-              [styles.filterListVisible]: isFilterListVisible
-            })}
-          >
-            {filterCategoryTypes.map(section => {
-              const categoriesInSection = categories.filter(c => c[section.id]);
-              const sortedCategoriesInSection = sortBy(
-                categoriesInSection,
-                category => category.title
-              );
-              return (
-                <div key={section.id}>
-                  <h3 className={styles.filterCategoryTitle}>{section.name}</h3>
-                  {sortedCategoriesInSection.map(category => {
-                    return (
-                      <FilterItem
-                        key={category.id}
-                        id={category.id}
-                        type="row"
-                        onChange={e => {
-                          const categoryId = e.target.value;
-                          const isChecked = e.target.checked;
-
-                          const newSelectedFilters = [...selectedFilters];
-
-                          if (isChecked) {
-                            newSelectedFilters.push(categoryId);
-                          } else {
-                            const i = newSelectedFilters.indexOf(categoryId);
-                            newSelectedFilters.splice(i, 1);
-                          }
-
-                          setSelectedFilters(newSelectedFilters);
-                          setCurrentPage(1);
-                        }}
-                        isChecked={selectedFilters.includes(category.id)}
-                        className={styles.filterItemInput}
-                        title={category.title}
-                        count={category.count}
-                      />
-                    );
-                  })}
-                </div>
-              );
-            })}
-          </div>
+          {categoryFilters}
         </div>
         <div
           className={classnames({
@@ -191,215 +399,8 @@ const App = () => {
           })}
           ref={profileContainerRef}
         >
-          {isLoading ? (
-            <Loader />
-          ) : (
-            <>
-              <div
-                className={classnames({
-                  [styles.profiles]: true
-                })}
-              >
-                {filteredDesigners.map(({ node: designer }, i) => {
-                  if (i < pagination.startIndex || i > pagination.endIndex) {
-                    return null;
-                  }
-
-                  const { recordId } = designer;
-                  const {
-                    name,
-                    websiteUrl,
-                    location,
-                    country,
-                    show,
-                    photo
-                  } = designer.data;
-
-                  if (recordId == null || designer == null || !show) {
-                    return null;
-                  }
-
-                  return (
-                    <Profile
-                      key={designer.recordId}
-                      image={photo[0].url}
-                      name={name}
-                      description={designer.data.description}
-                      location={location}
-                      country={country}
-                      websiteUrl={websiteUrl}
-                    />
-                  );
-                })}
-              </div>
-
-              <div className={styles.paginationContainer}>
-                <button
-                  onClick={() => {
-                    setCurrentPage(currentPage - 1);
-                    profileContainerRef.current.scrollTo(0, 0);
-                  }}
-                  disabled={pagination.currentPage === pagination.startPage}
-                  type="button"
-                  className={styles.paginationArrow}
-                >
-                  ←
-                </button>
-                <button
-                  className={styles.pageNumberButton}
-                  onClick={() => {
-                    setCurrentPage(1);
-                    profileContainerRef.current.scrollTo(0, 0);
-                  }}
-                  type="button"
-                  disabled={pagination.currentPage === 1}
-                >
-                  1
-                </button>
-                {currentPage >= numPagesToShowInPagination && <>&hellip;</>}
-                {pagination.pages.map(pageNumber => {
-                  // Skip over these page numbers because they'll always appear
-                  // in the pagination.
-                  if (pageNumber === 1 || pageNumber === pagination.totalPages) {
-                    return null;
-                  }
-
-                  return (
-                    <button
-                      key={pageNumber}
-                      className={styles.pageNumberButton}
-                      onClick={() => {
-                        setCurrentPage(pageNumber);
-                        profileContainerRef.current.scrollTo(0, 0);
-                      }}
-                      disabled={pagination.currentPage === pageNumber}
-                      type="button"
-                    >
-                      {pageNumber}
-                    </button>
-                  );
-                })}
-                {currentPage <=
-                  pagination.totalPages - (numPagesToShowInPagination + 1) && (
-                  <>&hellip;</>
-                )}
-                {pagination.totalPages !== 1 && (
-                  <button
-                    className={styles.pageNumberButton}
-                    onClick={() => {
-                      setCurrentPage(pagination.totalPages);
-                      profileContainerRef.current.scrollTo(0, 0);
-                    }}
-                    type="button"
-                    disabled={pagination.currentPage === pagination.totalPages}
-                  >
-                    {pagination.totalPages}
-                  </button>
-                )}
-                <button
-                  onClick={() => {
-                    setCurrentPage(currentPage + 1);
-                    profileContainerRef.current.scrollTo(0, 0);
-                  }}
-                  disabled={pagination.currentPage === pagination.endPage}
-                  type="button"
-                  className={styles.paginationArrow}
-                >
-                  →
-                </button>
-              </div>
-              <div className={styles.filterButtonContainer}>
-                <Button
-                  type="button"
-                  onClick={open}
-                  fullWidth={false}
-                  style={{
-                    backgroundColor: "#6362fc",
-                    borderRadius: "8px",
-                    boxShadow: "2px 4px 10px rgba(0, 0, 0, 0.2)"
-                  }}
-                >
-                  <FilterIcon /> Filter
-                  {selectedFilters.length > 0 && (
-                    <>
-                      <span>·</span> <span>{selectedFilters.length}</span>
-                    </>
-                  )}
-                </Button>
-              </div>
-            </>
-          )}
-          <div>
-            <DialogOverlay isOpen={showDialog} onDismiss={close}>
-              <DialogContent>
-                <div className={styles.dialogHeader}>
-                  <ClickableBox className={styles.closeButton} onClick={close}>
-                    <span aria-hidden>
-                      <CloseIcon />
-                    </span>
-                  </ClickableBox>
-                  <h2>Filter</h2>
-                  <button
-                    onClick={() => {
-                      setSelectedFilters([]);
-                      setCurrentPage(1);
-                    }}
-                    className={styles.filterClear}
-                    type="button"
-                    style={{ marginRight: "16px" }}
-                  >
-                    Clear
-                  </button>
-                </div>
-                <div className={styles.dialogBody}>
-                  {filterCategoryTypes.map(section => {
-                    const categoriesInSection = categories.filter(c => c[section.id]);
-                    const sortedCategoriesInSection = sortBy(
-                      categoriesInSection,
-                      category => category.title
-                    );
-
-                    return (
-                      <div key={section.id}>
-                        <h3 className={styles.filterCategoryTitle}>{section.name}</h3>
-                        {sortedCategoriesInSection.map(category => (
-                          <FilterItem
-                            key={category.id}
-                            id={category.id}
-                            type="pill"
-                            onChange={e => {
-                              const categoryId = e.target.value;
-                              const isChecked = e.target.checked;
-
-                              const newSelectedFilters = [...selectedFilters];
-
-                              if (isChecked) {
-                                newSelectedFilters.push(categoryId);
-                              } else {
-                                const i = newSelectedFilters.indexOf(categoryId);
-                                newSelectedFilters.splice(i, 1);
-                              }
-
-                              setSelectedFilters(newSelectedFilters);
-                              setCurrentPage(1);
-                            }}
-                            isChecked={selectedFilters.includes(category.id)}
-                            className={styles.filterItemInput}
-                            title={category.title}
-                          />
-                        ))}
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className={styles.dialogFooter}>
-                  <Button type="button" onClick={close}>
-                    View {filteredDesigners.length} designers
-                  </Button>
-                </div>
-              </DialogContent>
-            </DialogOverlay>
-          </div>
+          {isLoading ? <Loader /> : pageBody}
+          {dialogOverlay}
         </div>
       </div>
     </Layout>

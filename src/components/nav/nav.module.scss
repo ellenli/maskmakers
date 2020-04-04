@@ -32,17 +32,14 @@
   border-radius: 8px;
   background-color: $primary-purple;
   font-family: $pt-mono;
+
+  transition: all 0.1s;
+
   &:hover {
     text-decoration: none;
-    background-color: #414ad1;
+    box-shadow: 0 3px 3px -2px $secondary-orange;
   }
 }
-
-// .link::after {
-//   content: "·";
-//   position: absolute;
-//   right: -15px;
-// }
 
 .link:last-child::after {
   display: none;
