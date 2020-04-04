@@ -23,6 +23,23 @@ const Profile = props => {
           {location}
         </p>
       </div>
+
+      <Button
+  href={websiteUrl}
+  target="_blank"
+  rel="noopener noreferrer"
+  style={{
+    backgroundColor: "#626BEB",
+    borderRadius: 15,
+    gridColumn: "1 / -1",
+    marginTop: "5px",
+    marginBottom: "16px",
+    width: "88%"
+  }}
+>
+  <span className={styles.linkText}>Visit the maker</span>
+</Button>
+
     </div>
     </a>
   );
