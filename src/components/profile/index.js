@@ -9,7 +9,7 @@ const Profile = props => {
 
   return (
 
-<a href="{websiteUrl}" target="_blank">
+<a href={websiteUrl} target="_blank">
     <div
       className={styles.profile}
       style={{
