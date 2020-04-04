@@ -8,6 +8,8 @@ const Profile = props => {
   const { image, name, location, websiteUrl } = props;
 
   return (
+
+<a href="{websiteUrl}" target="_blank">
     <div
       className={styles.profile}
       style={{
@@ -21,23 +23,9 @@ const Profile = props => {
           <MapIcon style={{ marginBottom: "-2px", marginRight: "2px" }} size={14} />
           {location}
         </p>
-
-        <Button
-          href={websiteUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            backgroundColor: "#FF805C",
-            borderRadius: 99,
-            gridColumn: "1 / -1",
-            marginTop: "16px",
-            marginBottom: "12px"
-          }}
-        >
-          <span className={styles.linkText}>Visit Website</span>
-        </Button>
       </div>
     </div>
+    </a>
   );
 };
 
