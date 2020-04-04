@@ -32,12 +32,17 @@
   border-radius: 8px;
   background-color: $primary-purple;
   font-family: $pt-mono;
+  box-shadow: 0px 3px 0px 0px rgba(225, 140, 108, 0.3);
 
-  transition: all 0.1s;
+  transition: all 0.05s;
 
   &:hover {
     text-decoration: none;
-    box-shadow: 0 3px 3px -2px $secondary-orange;
+    box-shadow: 0px 3px 0px 0px rgba(225, 140, 108, 0.5);
+  }
+
+  &:active {
+    box-shadow: 0px 1px 0px 0px rgba(225, 140, 108, 0.5);
   }
 }
 
