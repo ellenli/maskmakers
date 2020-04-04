@@ -175,14 +175,12 @@ const App = () => {
                 <div key={section.id}>
                   <h3 className={styles.filterCategoryTitle}>{section.name}</h3>
                   {sortedCategoriesInSection.map(category => {
-                    const selectedCountry = selectedFilters[0];
-
                     if (category.location) {
                       const countryAndLocationObj = countryAndLocations.find(
                         obj => obj.location === category.id
                       );
 
-                      if (countryAndLocationObj.country !== selectedCountry) {
+                      if (!selectedFilters.includes(countryAndLocationObj.country)) {
                         return null;
                       }
                     }
