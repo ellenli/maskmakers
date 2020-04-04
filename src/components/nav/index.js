@@ -11,10 +11,10 @@ const Nav = () => {
       </Link>
       <nav className={styles.links}>
         <Link to="/about" className={styles.link}>
-          About
+          About us
         </Link>
         <Link to="/nominate" className={styles.link}>
-          List your business
+          Add a mask maker
         </Link>
       </nav>
     </div>
