@@ -10,10 +10,20 @@ const Nav = () => {
         <Logo className={styles.logo} />
       </Link>
       <nav className={styles.links}>
+        <Link to="/faq" className={styles.link}>
+          FAQ
+        </Link>
         <Link to="/about" className={styles.link}>
           About us
         </Link>
-        <a href="https://airtable.com/shrwyYwx7xdJZTU8Z" target="_blank" className={styles.link}>
+      </nav>
+      <nav className={styles.links}>
+        <a
+          href="https://airtable.com/shrwyYwx7xdJZTU8Z"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.link}
+        >
           Add a mask maker
         </a>
       </nav>
