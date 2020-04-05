@@ -17,7 +17,6 @@
   --background: white;
   --text: var(--gray);
   --page-shell-padding: 24px;
-  --sidebar: 310px;
   --sidebar-height: 208px;
 
   color: var(--gray);
@@ -125,9 +124,6 @@ menu,
 nav,
 section {
   display: block;
-}
-body {
-  line-height: 1;
 }
 ol,
 ul {
