@@ -13,6 +13,7 @@ const About = () => (
         <Nav theme="light" />
       </div>
       <div className={styles.main}>
+      <div className={styles.background}></div>
         <h1 className={styles.pageTitle}>About the club</h1>
         <div className={styles.aboutContainer}>
           <p className={styles.about}>
@@ -92,7 +93,7 @@ const About = () => (
               Andrey
             </a>
             ,{" "}
-            <a href="https://jesstam.ca/" target="_blank" rel="noopener noreferrer">
+            <a href="https://uglycute.life/" target="_blank" rel="noopener noreferrer">
               Jessica
             </a>
             ,{" "}
