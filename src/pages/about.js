@@ -13,7 +13,9 @@ const About = () => (
         <Nav theme="light" />
       </div>
       <div className={styles.main}>
-      <div className={styles.background}></div>
+        <div className={styles.imageContainer}>
+          <img className={styles.picture} src='https://maskmakers.club/background.png' alt="Maskmaker with scissors and cloth" />
+        </div>
         <h1 className={styles.pageTitle}>About the club</h1>
         <div className={styles.aboutContainer}>
           <p className={styles.about}>
@@ -24,6 +26,7 @@ const About = () => (
             <br />
             Mask on and <a href="/">support a local maker</a>.
           </p>
+          <h1 className={styles.pageTitle}>FAQ</h1>
           <h2 className={styles.subheading}>Why wear a mask?</h2>
           <p className={styles.about}>
             There are 3 simple reasons to wear a mask:

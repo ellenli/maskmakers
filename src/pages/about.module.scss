@@ -12,6 +12,7 @@
 .main {
   position: static;
   overflow-y: scroll;
+  overflow-x: hidden;
   background-color: var(--white);
   padding: 64px var(--page-shell-padding) 64px var(--page-shell-padding);
   transition: all 0.5s ease;
@@ -59,21 +60,24 @@ h2.subheading {
   padding-bottom: 16px;
   margin-bottom: 37px;
 }
-.background {
-  display: block;
-  position: relative;
-  background-image: url("https://maskmakers.club/background.png");
-  width: 100%;
-  height: 150px;
-  background-repeat: no-repeat;
-  background-size: contain;
-  @media (min-width: $desktop) {
-      height: 270px;
-      width: 100%;
-  }
-  margin: 0px auto 20px auto;
 
+.imageContainer {
+  width: 100%;
+  max-width: 1080px;
+  position: block;
+
+  .picture {
+    width: 120%;
+    position: relative;
+    right: 80px;
+
+    @media (min-width: $non-mobile) {
+      position: static;
+      width: 100%;
+    }
+  }
 }
+
 p > a {
   color: #E18B6C;
   font-weight: 400;
