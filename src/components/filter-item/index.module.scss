@@ -8,7 +8,7 @@
   text-transform: capitalize;
 
   &Pill {
-    font-size: 13px;
+    font-size: 14px;
     display: inline;
     input[type="checkbox"]:checked ~ label {
       background-color: var(--text);
@@ -29,9 +29,10 @@
   &Pill {
     margin: 0 8px 8px 0;
     padding: 16px;
-    background-color: var(--border-gray);
-    border-radius: 999px;
+    background-color: #E18C6C;
+    border-radius: 8px;
     display: inline-block;
+    color: white;
   }
   &Row {
     display: grid;
@@ -60,5 +61,5 @@
 }
 
 .count {
-  opacity: 0.5;
+  opacity: 0.8;
 }
