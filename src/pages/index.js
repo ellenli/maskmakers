@@ -18,10 +18,15 @@ import CloseIcon from "../icons/close";
 import FilterIcon from "../icons/filter";
 import Button from "../components/button";
 
+const createId = value => {
+  // replace all spaces with dash and lowercase
+  return value.replace(/\s+/g, "-").toLowerCase();
+};
+
 const createCategory = (value, type, count) => {
   return {
     title: value,
-    id: value.toLowerCase(),
+    id: createId(value),
     location: type === "location",
     country: type === "country",
     count
@@ -30,8 +35,8 @@ const createCategory = (value, type, count) => {
 
 const createLocationInCountry = (location, country) => {
   return {
-    location: location.toLowerCase(),
-    country: country.toLowerCase()
+    location: createId(location),
+    country: createId(country)
   };
 };
 
@@ -133,11 +138,11 @@ const App = () => {
 
     if (selectedLocationFilters.length) {
       return location
-        ? selectedLocationFilters.some(filter => location.toLowerCase() === filter)
+        ? selectedLocationFilters.some(filter => createId(location) === filter)
         : null;
     }
 
-    return country ? country.toLowerCase() === selectedCountryFilter : null;
+    return country ? createId(country) === selectedCountryFilter : null;
   });
 
   const pagination = paginate(
@@ -191,6 +196,8 @@ const App = () => {
                     const categoryId = e.target.value;
 
                     setSelectedCountryFilter(categoryId);
+                    setSelectedLocationFilters([]);
+
                     setCurrentPage(1);
                   }}
                   onClick={e => {
@@ -199,6 +206,7 @@ const App = () => {
                     // deselect country when clicked again
                     if (categoryId === selectedCountryFilter) {
                       setSelectedCountryFilter(null);
+                      setSelectedLocationFilters([]);
                       setCurrentPage(1);
                     }
                   }}
