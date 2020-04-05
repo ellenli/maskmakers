@@ -12,6 +12,7 @@
 .main {
   position: static;
   overflow-y: scroll;
+  overflow-x: hidden;
   background-color: var(--white);
   padding: 64px var(--page-shell-padding) 64px var(--page-shell-padding);
   transition: all 0.5s ease;
@@ -63,13 +64,15 @@ h2.subheading {
 .imageContainer {
   width: 100%;
   max-width: 1080px;
-  display: flex;
-  justify-content: flex-end;
+  position: block;
 
   .picture {
-    width: calc(100vw + 120px);
+    width: 120%;
+    position: relative;
+    right: 80px;
 
     @media (min-width: $non-mobile) {
+      position: static;
       width: 100%;
     }
   }
