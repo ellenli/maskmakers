@@ -6,7 +6,7 @@ const Loader = () => {
     <div className={styles.container}>
       <div>
         <h1 className={styles.heading}>
-          Mask Makers Club is a global collective of mask makers. #MaskOn
+          #MaskOn
         </h1>
         <div className={styles.spinner} />
       </div>

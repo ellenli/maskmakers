@@ -17,8 +17,8 @@ const About = () => (
         <div className={styles.aboutContainer}>
           <p className={styles.about}>
             Mask Makers Club is a global collective of mask makers. We are sewists,
-            makers, and helpers, united in a mission to slow the spread of COVID-19 by
-            supporting local communities and celebrating entrepreneurship for social good.
+            makers, and entrepreneurs, united in a mission to slow the spread of COVID-19 by
+            supporting local communities and bringing a bit of joy with every mask we make.
             <br />
             <br />
             Wear a mask. <a href="/">Support a maker</a>.
