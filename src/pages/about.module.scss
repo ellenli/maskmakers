@@ -64,15 +64,21 @@ h2.subheading {
   position: relative;
   background-image: url("https://maskmakers.club/background.png");
   width: 100%;
-  height: 150px;
+  height: 225px;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 150%;
+  background-position: right;
+  margin: 0px auto 20px auto;
+
+  @media (min-width: $non-mobile) {
+    height: 150px;
+    background-size: contain;
+    background-position: left;
+  }
   @media (min-width: $desktop) {
       height: 270px;
       width: 100%;
   }
-  margin: 0px auto 20px auto;
-
 }
 p > a {
   color: #E18B6C;
