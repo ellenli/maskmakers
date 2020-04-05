@@ -28,9 +28,7 @@
   background-color: var(--white);
 
   @media (min-width: $desktop) {
-    min-width: var(--sidebar);
-    width: var(--sidebar);
-    max-width: var(--sidebar);
+    min-width: $sidebar;
     height: 100vh;
     display: flex;
     flex-direction: column;
