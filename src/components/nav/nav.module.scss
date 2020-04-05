@@ -6,6 +6,7 @@
   font-family: $pt-mono;
   color: var(--text);
   background-color: transparent;
+  position: relative;
 }
 
 .logo {
@@ -47,5 +48,15 @@
 .filterButton {
   @media (min-width: $desktop) {
     display: none;
+  }
+}
+
+.social {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+
+  svg {
+    margin: 0 3px;
   }
 }
