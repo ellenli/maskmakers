@@ -1,7 +1,6 @@
 import React from "react";
 import classnames from "classnames";
 import { Link } from "gatsby";
-import PropTypes from "prop-types";
 import styles from "./index.module.scss";
 
 const Button = ({

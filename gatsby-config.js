@@ -16,10 +16,10 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-      trackingId: "UA-162749493-1",
-      sampleRate: 5,
-      siteSpeedSampleRate: 10,
-      cookieDomain: "maskmakers.club",
+        trackingId: "UA-162749493-1",
+        sampleRate: 5,
+        siteSpeedSampleRate: 10,
+        cookieDomain: "maskmakers.club"
       }
     },
     {

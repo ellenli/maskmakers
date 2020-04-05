@@ -1,0 +1,65 @@
+@import "../../styles/variables.scss";
+
+.main {
+  font-family: $pt-mono;
+  user-select: none;
+  background-color: var(--background);
+  color: var(--text);
+  text-transform: capitalize;
+
+  &Pill {
+    font-size: 14px;
+    display: inline;
+    input[type="radio"]:checked ~ label {
+      background-color: var(--text);
+      transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+      color: white;
+    }
+  }
+  &Row {
+    input:focus ~ label > svg {
+      border-radius: 2px;
+      box-shadow: var(--background) 0px 0px 0px 1px, var(--text) 0px 0px 0px 2px;
+    }
+  }
+}
+
+.label {
+  line-height: 0;
+  &Pill {
+    margin: 0 8px 8px 0;
+    padding: 16px;
+    background-color: #e18c6c;
+    border-radius: 8px;
+    display: inline-block;
+    color: white;
+  }
+  &Row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-gap: 10px;
+    align-items: center;
+    font-size: 14px;
+    padding: 4px 0;
+    margin: 4px 0;
+    border-radius: 2px;
+    &:hover {
+      cursor: pointer;
+      .labelTitle {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+  width: 1px;
+  height: 1px;
+}
+
+.count {
+  opacity: 0.8;
+}
