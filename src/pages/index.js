@@ -8,6 +8,7 @@ import ClickableBox from "clickable-box";
 import Profile from "../components/profile";
 import Layout from "../components/layout";
 import FilterItem from "../components/filter-item";
+import CountryFilterItem from "../components/country-filter-item";
 import Nav from "../components/nav";
 import Loader from "../components/loader";
 import paginate from "../paginate";
@@ -17,18 +18,31 @@ import CloseIcon from "../icons/close";
 import FilterIcon from "../icons/filter";
 import Button from "../components/button";
 
+const createId = value => {
+  // replace all spaces with dash and lowercase
+  return value.replace(/\s+/g, "-").toLowerCase();
+};
+
 const createCategory = (value, type, count) => {
   return {
     title: value,
-    id: value.toLowerCase(),
+    id: createId(value),
     location: type === "location",
     country: type === "country",
     count
   };
 };
 
+const createLocationInCountry = (location, country) => {
+  return {
+    location: createId(location),
+    country: createId(country)
+  };
+};
+
 const App = () => {
   const categories = [];
+  const countryAndLocations = [];
 
   const data = useStaticQuery(graphql`
     {
@@ -62,7 +76,10 @@ const App = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [visibleDesigners, setVisibleDesigners] = useState([]);
-  const [selectedFilters, setSelectedFilters] = useState([]);
+
+  const [selectedCountryFilter, setSelectedCountryFilter] = useState(null);
+  const [selectedLocationFilters, setSelectedLocationFilters] = useState([]);
+
   const [isFilterListVisible, setIsFilterListVisible] = useState(false);
 
   const [showDialog, setShowDialog] = React.useState(false);
@@ -92,6 +109,17 @@ const App = () => {
   });
   // ---
 
+  // create hash and relationship of countries and locations within countries
+  // ---
+  data.allAirtable.edges.map(edge => {
+    const { location, country } = edge.node.data;
+
+    if (location && country) {
+      return countryAndLocations.push(createLocationInCountry(location, country));
+    }
+  });
+  // ---
+
   useEffect(() => {
     const shuffledDesigners = shuffle(data.allAirtable.edges);
     setVisibleDesigners(shuffledDesigners);
@@ -102,18 +130,19 @@ const App = () => {
   const numPagesToShowInPagination = 10;
 
   const filteredDesigners = visibleDesigners.filter(designer => {
-    if (selectedFilters.length === 0) {
+    if (selectedCountryFilter == null) {
       return true;
     }
 
-    return selectedFilters.some(filter => {
-      const { location, country } = designer.node.data;
-      if (location && country) {
-        return location.toLowerCase() === filter || country.toLowerCase() === filter;
-      }
+    const { location, country } = designer.node.data;
 
-      return null;
-    });
+    if (selectedLocationFilters.length) {
+      return location
+        ? selectedLocationFilters.some(filter => createId(location) === filter)
+        : null;
+    }
+
+    return country ? createId(country) === selectedCountryFilter : null;
   });
 
   const pagination = paginate(
@@ -137,11 +166,56 @@ const App = () => {
           categoriesInSection,
           category => category.title
         );
+
+        // hide location filters if country not selected
+        if (selectedCountryFilter == null && section.id === "location") {
+          return null;
+        }
+
         return (
           <div key={section.id}>
             <h3 className={styles.filterCategoryTitle}>{section.name}</h3>
             {sortedCategoriesInSection.map(category => {
-              return (
+              if (category.location) {
+                // show locations for selected country only
+                const selectedCountryAndLocationObj = countryAndLocations.find(
+                  obj => obj.location === category.id
+                );
+
+                if (selectedCountryFilter !== selectedCountryAndLocationObj.country) {
+                  return null;
+                }
+              }
+
+              return category.country ? (
+                <CountryFilterItem
+                  key={category.id}
+                  id={category.id}
+                  type="row"
+                  onChange={e => {
+                    const categoryId = e.target.value;
+
+                    setSelectedCountryFilter(categoryId);
+                    setSelectedLocationFilters([]);
+
+                    setCurrentPage(1);
+                  }}
+                  onClick={e => {
+                    const categoryId = e.target.value;
+
+                    // deselect country when clicked again
+                    if (categoryId === selectedCountryFilter) {
+                      setSelectedCountryFilter(null);
+                      setSelectedLocationFilters([]);
+                      setCurrentPage(1);
+                    }
+                  }}
+                  isChecked={selectedCountryFilter === category.id}
+                  className={styles.filterItemInput}
+                  title={category.title}
+                  count={category.count}
+                />
+              ) : (
                 <FilterItem
                   key={category.id}
                   id={category.id}
@@ -150,19 +224,22 @@ const App = () => {
                     const categoryId = e.target.value;
                     const isChecked = e.target.checked;
 
-                    const newSelectedFilters = [...selectedFilters];
+                    if (category.location) {
+                      const newSelectedLocationFilters = [...selectedLocationFilters];
 
-                    if (isChecked) {
-                      newSelectedFilters.push(categoryId);
-                    } else {
-                      const i = newSelectedFilters.indexOf(categoryId);
-                      newSelectedFilters.splice(i, 1);
+                      if (isChecked) {
+                        newSelectedLocationFilters.push(categoryId);
+                      } else {
+                        const i = newSelectedLocationFilters.indexOf(categoryId);
+                        newSelectedLocationFilters.splice(i, 1);
+                      }
+
+                      setSelectedLocationFilters(newSelectedLocationFilters);
                     }
 
-                    setSelectedFilters(newSelectedFilters);
                     setCurrentPage(1);
                   }}
-                  isChecked={selectedFilters.includes(category.id)}
+                  isChecked={selectedLocationFilters.includes(category.id)}
                   className={styles.filterItemInput}
                   title={category.title}
                   count={category.count}
@@ -294,9 +371,9 @@ const App = () => {
           }}
         >
           <FilterIcon /> Filter
-          {selectedFilters.length > 0 && (
+          {selectedCountryFilter && (
             <>
-              <span>·</span> <span>{selectedFilters.length}</span>
+              <span>·</span> <span>{1 + selectedLocationFilters.length}</span>
             </>
           )}
         </Button>
@@ -317,7 +394,8 @@ const App = () => {
             <h2>Filter</h2>
             <button
               onClick={() => {
-                setSelectedFilters([]);
+                setSelectedCountryFilter(null);
+                setSelectedLocationFilters([]);
                 setCurrentPage(1);
               }}
               className={styles.filterClear}
@@ -335,35 +413,86 @@ const App = () => {
                 category => category.title
               );
 
+              // hide location filters if country not selected
+              if (selectedCountryFilter == null && section.id === "location") {
+                return null;
+              }
+
               return (
                 <div key={section.id}>
                   <h3 className={styles.filterCategoryTitle}>{section.name}</h3>
-                  {sortedCategoriesInSection.map(category => (
-                    <FilterItem
-                      key={category.id}
-                      id={category.id}
-                      type="pill"
-                      onChange={e => {
-                        const categoryId = e.target.value;
-                        const isChecked = e.target.checked;
+                  {sortedCategoriesInSection.map(category => {
+                    if (category.location) {
+                      // show locations for selected country only
+                      const selectedCountryAndLocationObj = countryAndLocations.find(
+                        obj => obj.location === category.id
+                      );
 
-                        const newSelectedFilters = [...selectedFilters];
+                      if (
+                        selectedCountryFilter !== selectedCountryAndLocationObj.country
+                      ) {
+                        return null;
+                      }
+                    }
 
-                        if (isChecked) {
-                          newSelectedFilters.push(categoryId);
-                        } else {
-                          const i = newSelectedFilters.indexOf(categoryId);
-                          newSelectedFilters.splice(i, 1);
-                        }
+                    return category.country ? (
+                      <CountryFilterItem
+                        key={category.id}
+                        id={category.id}
+                        type="pill"
+                        onChange={e => {
+                          const categoryId = e.target.value;
 
-                        setSelectedFilters(newSelectedFilters);
-                        setCurrentPage(1);
-                      }}
-                      isChecked={selectedFilters.includes(category.id)}
-                      className={styles.filterItemInput}
-                      title={category.title}
-                    />
-                  ))}
+                          setSelectedCountryFilter(categoryId);
+                          setCurrentPage(1);
+                        }}
+                        onClick={e => {
+                          const categoryId = e.target.value;
+
+                          // deselect country when clicked again
+                          if (categoryId === selectedCountryFilter) {
+                            setSelectedCountryFilter(null);
+                            setCurrentPage(1);
+                          }
+                        }}
+                        isChecked={selectedCountryFilter === category.id}
+                        className={styles.filterItemInput}
+                        title={category.title}
+                        count={category.count}
+                      />
+                    ) : (
+                      <FilterItem
+                        key={category.id}
+                        id={category.id}
+                        type="pill"
+                        onChange={e => {
+                          const categoryId = e.target.value;
+                          const isChecked = e.target.checked;
+
+                          if (category.location) {
+                            const newSelectedLocationFilters = [
+                              ...selectedLocationFilters
+                            ];
+
+                            if (isChecked) {
+                              newSelectedLocationFilters.push(categoryId);
+                            } else {
+                              const i = newSelectedLocationFilters.indexOf(categoryId);
+                              newSelectedLocationFilters.splice(i, 1);
+                            }
+
+                            setSelectedLocationFilters(newSelectedLocationFilters);
+                          }
+
+                          setCurrentPage(1);
+                        }}
+                        isChecked={selectedLocationFilters.includes(category.id)}
+                        className={styles.filterItemInput}
+                        title={category.title}
+                        count={category.count}
+                      />
+                    );
+                  })}
                 </div>
               );
             })}

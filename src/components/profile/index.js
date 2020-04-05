@@ -1,7 +1,6 @@
 import React from "react";
 import MapIcon from "../../icons/map";
 import styles from "./profile.module.scss";
-import Button from "../button";
 
 function locationAndCountryText(location, country) {
   if (location && country) {
