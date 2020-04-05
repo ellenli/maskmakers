@@ -13,7 +13,9 @@ const About = () => (
         <Nav theme="light" />
       </div>
       <div className={styles.main}>
-        <div className={styles.background} />
+        <div className={styles.imageContainer}>
+          <img className={styles.picture} src='https://maskmakers.club/background.png' alt="Maskmaker with scissors and cloth" />
+        </div>
         <h1 className={styles.pageTitle}>About the club</h1>
         <div className={styles.aboutContainer}>
           <p className={styles.about}>
