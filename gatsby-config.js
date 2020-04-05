@@ -16,7 +16,10 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: process.env.WWD_GOOGLE_ANALYTICS_ID
+      trackingId: "UA-162749493-1",
+      sampleRate: 5,
+      siteSpeedSampleRate: 10,
+      cookieDomain: "maskmakers.club",
       }
     },
     {
@@ -53,6 +56,6 @@ module.exports = {
   ],
 
   siteMetadata: {
-    title: "Tada"
+    title: "Mask Makers Club"
   }
 };
