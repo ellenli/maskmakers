@@ -11,10 +11,15 @@
     font-size: 14px;
     display: inline;
     input[type="checkbox"]:checked ~ label {
-      background-color: var(--text);
+      background-color: $primary-purple;
       transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
       color: white;
+
+      @media (min-width: $desktop) {
+        background-color: var(--text);
+      }
     }
+
   }
   &Row {
     input:focus ~ label > svg {
