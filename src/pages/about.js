@@ -21,7 +21,7 @@ const About = () => (
             supporting local communities and bringing a bit of joy with every mask we make.
             <br />
             <br />
-            Wear a mask. <a href="/">Support a maker</a>.
+            Mask on and <a href="/">support a local maker</a>.
           </p>
           <h2 className={styles.subheading}>Why wear a mask?</h2>
           <p className={styles.about}>
@@ -45,7 +45,7 @@ const About = () => (
           <p className={styles.about}>
             To join the club as a mask maker, or to add a mask maker you know,{" "}
             <a
-              href="https:/airtable.com/shrwyYwx7xdJZTU8Z"
+              href="https://airtable.com/shrwyYwx7xdJZTU8Z"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -83,51 +83,47 @@ const About = () => (
         <h1 className={styles.pageTitle}>About the project</h1>
         <div className={styles.aboutContainer}>
           <p className={styles.about}>
-            Mask Makers Club is a no-profit project founded by{" "}
-            <a href="" target="_blank" rel="noopener noreferrer">
+            Mask Makers Club is a non-profit project started by{" "}
+            <a href="https://twitter.com/ellenxli" target="_blank" rel="noopener noreferrer">
               Ellen
             </a>{" "}
-            with help and support from friends and organizations around the world.
-          </p>
-          <h2 className={styles.subheading}>Team</h2>
-          <p className={styles.about}>
-            Art and design by{" "}
-            <a href="" target="_blank" rel="noopener noreferrer">
+            and friends. Art and design by{" "}
+            <a href="https://twitter.com/a_gargul" target="_blank" rel="noopener noreferrer">
               Andrey
             </a>
             ,{" "}
-            <a href="" target="_blank" rel="noopener noreferrer">
+            <a href="https://jesstam.ca/" target="_blank" rel="noopener noreferrer">
               Jessica
             </a>
             ,{" "}
-            <a href="" target="_blank" rel="noopener noreferrer">
+            <a href="http://localkristine.com/" target="_blank" rel="noopener noreferrer">
               Kristine
             </a>
             , and{" "}
-            <a href="" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.joelletso.com/" target="_blank" rel="noopener noreferrer">
               Joelle
             </a>
             . Marketing by{" "}
-            <a href="" target="_blank" rel="noopener noreferrer">
+            <a href="https://twitter.com/CarlCasis" target="_blank" rel="noopener noreferrer">
               Carl
             </a>
             . Development by{" "}
-            <a href="" target="_blank" rel="noopener noreferrer">
+            <a href="https://twitter.com/djirdehh" target="_blank" rel="noopener noreferrer">
               Hassan
             </a>
             ,{" "}
-            <a href="" target="_blank" rel="noopener noreferrer">
+            <a href="https://twitter.com/attaboy" target="_blank" rel="noopener noreferrer">
               Luke
             </a>
             ,{" "}
-            <a href="" target="_blank" rel="noopener noreferrer">
+            <a href="https://twitter.com/kasrak" target="_blank" rel="noopener noreferrer">
               Kasra
             </a>
             , and{" "}
-            <a href="" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.ben-che.com/" target="_blank" rel="noopener noreferrer">
               Ben
             </a>
-            . Our source code is{" "}
+            .<br /><br />Our source code is{" "}
             <a href="https://github.com/ellenli/maskmakers/" target="_blank">
               on GitHub
             </a>
