@@ -14,37 +14,96 @@ const About = () => (
       </div>
       <div className={styles.main}>
         <div className={styles.imageContainer}>
-          <img className={styles.picture} src='https://maskmakers.club/background.png' alt="Maskmaker with scissors and cloth" />
+          <img
+            className={styles.picture}
+            src="https://maskmakers.club/background.png"
+            alt="Maskmaker with scissors and cloth"
+          />
         </div>
         <h1 className={styles.pageTitle}>About the club</h1>
         <div className={styles.aboutContainer}>
           <p className={styles.about}>
-            Mask Makers Club is a global collective of mask makers. We are sewists,
-            makers, and entrepreneurs, united in a mission to slow the spread of COVID-19 by
-            supporting local communities and bringing a bit of joy with every mask we make.
+            Mask Makers Club is a global collective of mask makers. We are
+            sewists, makers, and entrepreneurs, united in a mission to slow the
+            spread of COVID-19 by supporting local communities and bringing a
+            bit of joy with every mask we make.
             <br />
             <br />
             Mask on and <a href="/">support a local maker</a>.
           </p>
           <h1 className={styles.pageTitle}>FAQ</h1>
+          <h2 className={styles.subheading}>Are the masks medical-grade?</h2>
+          <p className={styles.about}>
+            The masks we feature are not medical-grade masks or N-95
+            respirators. We believe that medical-grade supplies should be for
+            health care professionals and frontline workers who are higher risk
+            in their work directly responding to COVID-19.
+            <br />
+            <br />
+            Organizations such as{" "}
+            <a
+              href="https://masksfordocs.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Masks for Docs
+            </a>{" "}
+            and{" "}
+            <a
+              href="https://www.weneedmasks.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              We Need Masks
+            </a>{" "}
+            are focused on connecting sewists with the healthcare community in
+            order to get them the protective supplies that they require.
+          </p>
+
+          <h2 className={styles.subheading}>
+            Are cloth masks actually effective in slowing the spread of the
+            COVID-19?
+          </h2>
+          <p className={styles.about}>
+            Homemade masks do not guarantee protection against COVID-19,
+            however, wearing a cloth mask is more effective than not wearing a
+            mask at all.{" "}
+            <a
+              href="https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/diy-cloth-face-coverings.html"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              The CDC recommends wearing cloth face coverings in public settings
+              where other social distancing measures are difficult to maintain
+            </a>
+            .
+          </p>
+
           <h2 className={styles.subheading}>Why wear a mask?</h2>
           <p className={styles.about}>
             There are 3 simple reasons to wear a mask:
             <ol type="1">
               <li>Protect others by not spreading COVID-19 if you have it</li>
               <li>
-                Protect yourself by reducing your chances of catching COVID-19 when you go
-                outside
+                Protect yourself by reducing your chances of catching COVID-19
+                when you go outside
               </li>
-              <li>Reduce face touching by wearing something that covers your face</li>
+              <li>
+                Reduce face touching by wearing something that covers your face
+              </li>
             </ol>
             <br />
             Learn more at{" "}
-            <a href="https://masks4all.co/" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://masks4all.co/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               masks4all
             </a>
             .
           </p>
+
           <h2 className={styles.subheading}>How do I join the club?</h2>
           <p className={styles.about}>
             To join the club as a mask maker, or to add a mask maker you know,{" "}
@@ -59,8 +118,8 @@ const About = () => (
           </p>
           <h2 className={styles.subheading}>How do I leave the club?</h2>
           <p className={styles.about}>
-            If you've been featured in the club and you'd rather not be, please contact us
-            and you will be removed.
+            If you've been featured in the club and you'd rather not be, please
+            contact us and you will be removed.
           </p>
           <h2 className={styles.subheading}>Contact us</h2>
           <p className={styles.about}>
@@ -92,39 +151,75 @@ const About = () => (
               Ellen
             </a>{" "}
             and friends. Art and design by{" "}
-            <a href="https://twitter.com/a_gargul" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://twitter.com/a_gargul"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Andrey
             </a>
             ,{" "}
-            <a href="https://uglycute.life/" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://uglycute.life/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Jessica
             </a>
             ,{" "}
-            <a href="http://localkristine.com/" target="_blank" rel="noopener noreferrer">
+            <a
+              href="http://localkristine.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Kristine
             </a>
             , and{" "}
-            <a href="https://www.joelletso.com/" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.joelletso.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Joelle
             </a>
             . Marketing by{" "}
-            <a href="https://twitter.com/CarlCasis" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://twitter.com/CarlCasis"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Carl
             </a>
             . Development by{" "}
-            <a href="https://twitter.com/djirdehh" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://twitter.com/djirdehh"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Hassan
             </a>
             ,{" "}
-            <a href="https://twitter.com/attaboy" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://twitter.com/attaboy"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Luke
             </a>
             ,{" "}
-            <a href="https://twitter.com/kasrak" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://twitter.com/kasrak"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Kasra
             </a>
             , and{" "}
-            <a href="https://www.ben-che.com/" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.ben-che.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Ben
             </a>
             .<br /><br />Our website is built on{" "}
@@ -136,7 +231,7 @@ const About = () => (
             Jules
             </a>
             . Our source code is{" "}
-            <a href="https://github.com/ellenli/maskmakers/" target="_blank">
+            <a href="https://github.com/ellenli/maskmakers/" target="_blank" rel="noopener noreferrer">
               on GitHub
             </a>
             .
