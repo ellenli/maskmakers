@@ -499,7 +499,7 @@ const App = () => {
           </div>
           <div className={styles.dialogFooter}>
             <Button type="button" onClick={close}>
-              View {filteredDesigners.length} designers
+              Apply filter
             </Button>
           </div>
         </DialogContent>
