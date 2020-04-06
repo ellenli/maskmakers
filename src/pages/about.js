@@ -87,7 +87,7 @@ const About = () => (
         <h1 className={styles.pageTitle}>About the project</h1>
         <div className={styles.aboutContainer}>
           <p className={styles.about}>
-            Mask Makers Club is a non-profit project started by{" "}
+            Mask Makers Club is a project started by{" "}
             <a href="https://twitter.com/ellenxli" target="_blank" rel="noopener noreferrer">
               Ellen
             </a>{" "}
@@ -127,7 +127,15 @@ const About = () => (
             <a href="https://www.ben-che.com/" target="_blank" rel="noopener noreferrer">
               Ben
             </a>
-            .<br /><br />Our source code is{" "}
+            .<br /><br />Our website is built on{" "}
+            <a href="https://womenwho.design/" target="_blank" rel="noopener noreferrer">
+            Women Who Design
+            </a>{" "}
+             by{" "}
+            <a href="https://twitter.com/julesforrest">
+            Jules
+            </a>
+            . Our source code is{" "}
             <a href="https://github.com/ellenli/maskmakers/" target="_blank">
               on GitHub
             </a>
