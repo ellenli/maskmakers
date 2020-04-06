@@ -37,7 +37,10 @@ const About = () => (
             The masks we feature are not medical-grade masks or N-95
             respirators. We believe that medical-grade supplies should be for
             health care professionals and frontline workers who are higher risk
-            in their work directly responding to COVID-19. Organizations like{" "}
+            in their work directly responding to COVID-19.
+            <br />
+            <br />
+            Organizations such as{" "}
             <a
               href="https://masksfordocs.com/"
               target="_blank"
@@ -53,7 +56,8 @@ const About = () => (
             >
               We Need Masks
             </a>{" "}
-            are better suited to provide the medical-grade masks.
+            are focused on connecting sewists with the healthcare community in
+            order to get them the protective supplies that they require.
           </p>
 
           <h2 className={styles.subheading}>
@@ -61,17 +65,18 @@ const About = () => (
             COVID-19?
           </h2>
           <p className={styles.about}>
-            Yes; wearing a cloth mask is more effective than not wearing a mask
-            at all.{" "}
+            Homemade masks do not guarantee protection against COVID-19,
+            however, wearing a cloth mask is more effective than not wearing a
+            mask at all.{" "}
             <a
               href="https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/diy-cloth-face-coverings.html"
               target="_blank"
               rel="noopener noreferrer"
             >
-              The CDC recommends
-            </a>{" "}
-            wearing cloth face coverings in public settings where other social
-            distancing measures are difficult to maintain.
+              The CDC recommends wearing cloth face coverings in public settings
+              where other social distancing measures are difficult to maintain
+            </a>
+            .
           </p>
 
           <h2 className={styles.subheading}>Why wear a mask?</h2>
