@@ -190,6 +190,11 @@
   border-top: 1px solid var(--border-gray);
   padding: 16px;
   margin-top: auto;
+  background-color: $primary-purple;
+  
+  > button {
+    background-color: $primary-purple;
+  }
 }
 
 .filterClear {
