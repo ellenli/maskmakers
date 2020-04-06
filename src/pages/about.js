@@ -47,7 +47,7 @@ const About = () => (
             </a>{" "}
             and{" "}
             <a
-              href="https://masksfordocs.com/"
+              href="https://www.weneedmasks.org/"
               target="_blank"
               rel="noopener noreferrer"
             >
