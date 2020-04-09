@@ -10,13 +10,13 @@ const Layout = ({ children }) => (
         {
           property: "description",
           content:
-            "A global collective of mask makers. #MaskOn"
+            "A global directory of mask makers. Join the club. #MaskMakersClub"
         },
         { property: "og:title", content: "Mask Makers Club" },
         {
           property: "og:description",
           content:
-            "A global collective of mask makers. #MaskOn"
+            "A global directory of mask makers. Join the club. #MaskMakersClub"
         },
 
         {
