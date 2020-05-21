@@ -47,8 +47,8 @@ module.exports = {
         concurrency: 5,
         tables: [
           {
-            baseId: "appWCcQ2UsrJFIHsp",
-            tableName: "providers"
+            baseId: process.env.AIRTABLE_BASE_ID,
+            tableName: "FORM"
           }
         ]
       }

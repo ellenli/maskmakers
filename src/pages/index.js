@@ -27,7 +27,7 @@ const createCategory = (value, type, count) => {
   return {
     title: value,
     id: createId(value),
-    location: type === "location",
+    vertical: type === "vertical",
     country: type === "country",
     count
   };
@@ -46,27 +46,21 @@ const App = () => {
 
   const data = useStaticQuery(graphql`
     {
-      allAirtable(filter: { table: { eq: "providers" } }) {
+      allAirtable(filter: { table: { eq: "FORM"} } ) {
         edges {
           node {
             recordId
             data {
-              name
-              websiteUrl
-              location
-              country
-              show
-              photo {
+              Vertical
+              Website
+              Name
+              Attachments {
                 url
               }
             }
           }
         }
-        locations: group(field: data___location) {
-          fieldValue
-          totalCount
-        }
-        countries: group(field: data___country) {
+        verticals: group(field: data___Vertical) {
           fieldValue
           totalCount
         }
@@ -79,6 +73,7 @@ const App = () => {
 
   const [selectedCountryFilter, setSelectedCountryFilter] = useState(null);
   const [selectedLocationFilters, setSelectedLocationFilters] = useState([]);
+  const [selectedCategoriesFilters, setSelectedCategoriesFilters] = useState([]);
 
   const [isFilterListVisible, setIsFilterListVisible] = useState(false);
 
@@ -92,21 +87,26 @@ const App = () => {
 
   const filterCategoryTypes = [
     { name: "Country", id: "country" },
-    { name: "City/state", id: "location" }
+    { name: "City/state", id: "location" },
+    { name: "Categories", id: "vertical" }
   ];
 
   // dynamically create categories from location and country fields in database
   // if this ever causes issue, revert back to manual creation of these categories
   // ---
-  data.allAirtable.locations.map(location => {
-    const category = createCategory(location.fieldValue, "location", location.totalCount);
+  data.allAirtable.verticals.map(vertical => {
+    const category = createCategory(vertical.fieldValue, "vertical", vertical.totalCount);
     return categories.push(category);
-  });
+  })
+  // data.allAirtable.locations.map(location => {
+  //   const category = createCategory(location.fieldValue, "location", location.totalCount);
+  //   return categories.push(category);
+  // });
 
-  data.allAirtable.countries.map(country => {
-    const category = createCategory(country.fieldValue, "country", country.totalCount);
-    return categories.push(category);
-  });
+  // data.allAirtable.countries.map(country => {
+  //   const category = createCategory(country.fieldValue, "country", country.totalCount);
+  //   return categories.push(category);
+  // });
   // ---
 
   // create hash and relationship of countries and locations within countries
@@ -130,19 +130,19 @@ const App = () => {
   const numPagesToShowInPagination = 10;
 
   const filteredDesigners = visibleDesigners.filter(designer => {
-    if (selectedCountryFilter == null) {
+    if (!selectedCategoriesFilters.length) {
       return true;
     }
 
-    const { location, country } = designer.node.data;
+    const { Vertical } = designer.node.data;
 
-    if (selectedLocationFilters.length) {
-      return location
-        ? selectedLocationFilters.some(filter => createId(location) === filter)
+    if (selectedCategoriesFilters.length) {
+      return Vertical
+        ? selectedCategoriesFilters.some(filter => createId(Vertical) === filter)
         : null;
     }
 
-    return country ? createId(country) === selectedCountryFilter : null;
+    // return Vertical ? createId(Vertical) === selectedCategoriesFilter : null;
   });
 
   const pagination = paginate(
@@ -265,21 +265,22 @@ const App = () => {
           }
 
           const { recordId } = designer;
-          const { name, websiteUrl, location, country, show, photo } = designer.data;
+          const { Name, Website, location, country, Attachments } = designer.data;
+          // Add a published to airtable and check below
 
-          if (recordId == null || designer == null || !show) {
+          if (recordId == null || designer == null) {
             return null;
           }
 
           return (
             <Profile
               key={designer.recordId}
-              image={photo[0].url}
-              name={name}
+              image={Attachments[0].url}
+              name={Name}
               description={designer.data.description}
               location={location}
               country={country}
-              websiteUrl={websiteUrl}
+              websiteUrl={Website}
             />
           );
         })}
