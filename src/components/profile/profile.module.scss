@@ -1,6 +1,7 @@
 @import "../../styles/variables.scss";
 
 .profile {
+  position: relative;
   background-color: #fff;
   display: grid;
   grid-template-columns: 120px 1fr;
@@ -9,9 +10,9 @@
   --profile-theme-color: #6362fc;
   font-size: 16px;
   border-radius: 20px;
-  border: 1px solid #fce0d7;
+  border: 3px hidden;
   text-decoration: none;
-  box-shadow: 0px 3px 0px 0px rgba(225, 140, 108, 0.3);
+  box-shadow: 0px 3px 0px 0px rgba(69, 113, 177, 0.8);
   margin: 0px 0px 5px 0px;
   transition: all 0.05s;
 
@@ -101,13 +102,19 @@
     color: $primary-purple;
   }
 }
-.profile:hover {
-  box-shadow: 0px 3px 0px 0px rgba(225, 140, 108, 0.5);
+.profile:hover,
+.profile:focus {
+  box-shadow: 0px 3px 0px 0px rgba(69, 113, 177, 1);
   margin: 2px 0px 3px 0px;
 }
 .profile:active {
-  box-shadow: 0px 1px 0px 0px rgba(225, 140, 108, 0.5);
+  box-shadow: 0px 1px 0px 0px rgba(69, 113, 177, 1);
   margin: 4px 0px 1px 0px;
+}
+
+.profile:focus {
+  outline: none;
+  border: 3px solid rgba(69, 113, 177, 1);
 }
 
 .linkText {
@@ -121,4 +128,30 @@
   @media (max-width: $desktop - 1) {
     display: none;
   }
+}
+
+.giftCardBadge,
+.filterTag {
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.giftCardBadge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #DF280C;
+  color: #FFF;
+  margin: 10px; 
+}
+
+.filterTags {
+  display: flex;
+  margin-top: 40px;
+}
+
+.filterTag {
+  background: #FFEEB2;
+  color: #3B477E;
+  margin-right: 10px;
 }
