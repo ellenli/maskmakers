@@ -3,6 +3,7 @@
 .container {
   overflow-x: hidden;
   font-family: $graphik;
+  background-color: $primary-blue;
   @media (min-width: $desktop) {
     display: flex;
   }

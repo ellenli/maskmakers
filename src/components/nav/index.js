@@ -1,44 +1,30 @@
 import React from "react";
 import { Link } from "gatsby";
-import Logo from "../logo";
 import styles from "./nav.module.scss";
-
-import TwitterIcon from "../../icons/twitter";
-import InstagramIcon from "../../icons/instagram";
 
 const Nav = () => {
   return (
     <div className={styles.container}>
-      <div className={styles.social}>
-        <a
-          href="https://twitter.com/maskmakersclub"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <TwitterIcon />
-        </a>
-        <a
-          href="https://instagram.com/maskmakersclub"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <InstagramIcon />
-        </a>
-      </div>
-      <Link to="/">
-        <Logo className={styles.logo} />
+      <Link to="/" className={styles.link}>
+        <div className={styles.titleContainer}>
+          <span className={styles.celebratingContainer}>
+            Celebrating
+          </span>
+          <h1>Asian merchants at Shopify</h1>
+        </div>
       </Link>
       <nav className={styles.links}>
         <Link to="/about" className={styles.link}>
-          About us
+          About
         </Link>
+        <span className={styles.separator}>•</span>
         <a
-          href="https://airtable.com/shrwyYwx7xdJZTU8Z"
+          href="https://airtable.com/shrG3WYY0EFTUjbp5"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.link}
         >
-          Add a mask maker
+          Nominate
         </a>
       </nav>
     </div>
