@@ -141,8 +141,8 @@
   position: absolute;
   top: 0;
   right: 0;
-  background: #DF280C;
-  color: #FFF;
+  background: #F16163;
+  color: #000;
   margin: 10px;
 
   @media (max-width: $desktop) {
@@ -155,6 +155,10 @@
   margin-top: 40px;
   align-items: baseline;
   flex-wrap: wrap;
+
+  .giftCardBadge {
+    display: none;
+  }
 
   @media (max-width: $desktop) {
     font-size: 13px;
