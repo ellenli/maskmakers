@@ -1,15 +1,17 @@
-<div align="center">
-<p>
-<img src="https://media.giphy.com/media/jS7fF8pIJB8Pz2uVi7/giphy.gif" width="250"/>
-</p>
-</div>
+# AHM
 
 ## Running the app 👩‍💻
 
-To run the app, you'll need to have an API key from [Airtable](https://airtable.com/). To generate an API key, navigate to your Airtable account page and when generated, save the API key as an environment variable in a `.env` file in the root of your project.
+Grab your personal API key from [airtable](https://airtable.com/account) and plop it inside your `.env` file at the project root
 
 ```
 AIRTABLE_API_KEY={API_KEY_VALUE}
+```
+
+Grab the airtable app ID and plop it into the `.env` file as well.
+
+```
+AIRTABLE_BASE_ID={BASE_ID_VALUE}
 ```
 
 Install the app dependencies.
