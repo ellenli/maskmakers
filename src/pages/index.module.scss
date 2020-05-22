@@ -53,7 +53,7 @@
   grid-gap: calc(var(--page-shell-padding));
 
   @media (min-width: $non-mobile) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     grid-gap: 1.5rem;
     @supports not (display: grid) {
       display: block;
