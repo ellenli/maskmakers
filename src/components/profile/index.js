@@ -1,5 +1,4 @@
 import React from "react";
-import ReactCountryFlag from "react-country-flag";
 import MapIcon from "../../icons/map";
 import styles from "./profile.module.scss";
 
@@ -47,39 +46,8 @@ const Profile = props => {
       <div className={styles.giftCardBadge}>Gift card only</div>
       <div style={{ backgroundImage: `url(${image})` }} className={styles.image} />
       <div className={styles.card}>
-        <div className={styles.cardHeader}>
-          <div>
-            <h2 className={styles.name}>{name}</h2>
-            {locationAndCountry(location, country)}
-          </div>
-          <div>
-            <ReactCountryFlag
-              className="emojiFlag"
-              countryCode="PH"
-              style={{
-                  fontSize: '1.2em',
-              }}
-              aria-label="Filipino"
-            />
-            <ReactCountryFlag
-              className="emojiFlag"
-              countryCode="JP"
-              style={{
-                  fontSize: '1.2em',
-              }}
-              aria-label="Japanese"
-            />
-            <ReactCountryFlag
-              className="emojiFlag"
-              countryCode="IN"
-              style={{
-                  fontSize: '1.2em',
-              }}
-              aria-label="Indian"
-            />
-          </div>
-        </div>
-        
+        <h2 className={styles.name}>{name}</h2>
+        {locationAndCountry(location, country)}
         <div className={styles.filterTags}>
           <div className={styles.giftCardBadge}>Gift card only</div>
           <div className={styles.filterTag}>Tag</div>
