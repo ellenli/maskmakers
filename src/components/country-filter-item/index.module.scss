@@ -12,9 +12,9 @@
     display: inline;
 
     input[type="radio"]:checked ~ label {
-      background-color: $primary-purple;
+      background-color: $primary-blue;
       transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
-      color: white;
+      color: #FED9AF;
 
       @media (min-width: $desktop) {
         background-color: var(--text);
@@ -33,12 +33,14 @@
 .label {
   line-height: 0;
   &Pill {
+    font-size: 16px;
+    font-family: Sofia Pro;
     margin: 0 8px 8px 0;
     padding: 16px;
-    background-color: #e18c6c;
-    border-radius: 8px;
+    background-color: #E5E5E5;
+    border-radius: 4px;
     display: inline-block;
-    color: white;
+    color: #3B477E;
     
   }
   &Row {

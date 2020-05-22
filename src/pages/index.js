@@ -86,7 +86,7 @@ const App = () => {
   const profileContainerRef = useRef();
 
   const filterCategoryTypes = [
-    { name: "Country", id: "country" },
+    { name: "Location", id: "country" },
     { name: "City/state", id: "location" },
     { name: "Categories", id: "vertical" }
   ];
@@ -268,7 +268,7 @@ const App = () => {
           const { Name, Website, location, country, Attachments } = designer.data;
           // Add a published to airtable and check below
 
-          if (recordId == null || designer == null) {
+          if (recordId == null || designer == null || Attachments == null) {
             return null;
           }
 
