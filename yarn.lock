@@ -10778,6 +10778,11 @@ react-clientside-effect@^1.2.2:
   dependencies:
     "@babel/runtime" "^7.0.0"
 
+react-country-flag@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-country-flag/-/react-country-flag-2.1.0.tgz#8c6a70d4c496370112e506b79c5fc2a354841700"
+  integrity sha512-OvPNRYFWpPPoh71vwM/z5dhSQOq8Lbh5Kn6XrQVxLUQ+Ps8+JaP+TQeRS3wk3M3gA+cCc6ZBNSPPXH7+Sep6+Q==
+
 react-dev-utils@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-4.2.3.tgz#5b42d9ea58d5e9e017a2f57a40a8af408a3a46fb"
