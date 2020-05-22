@@ -54,6 +54,7 @@ const App = () => {
               Vertical
               Website
               Name
+              Country
               Attachments {
                 url
               }
@@ -265,7 +266,7 @@ const App = () => {
           }
 
           const { recordId } = designer;
-          const { Name, Website, location, country, Attachments } = designer.data;
+          const { Name, Website, location, Country, Attachments } = designer.data;
           // Add a published to airtable and check below
 
           if (recordId == null || designer == null || Attachments == null) {
@@ -279,7 +280,7 @@ const App = () => {
               name={Name}
               description={designer.data.description}
               location={location}
-              country={country}
+              country={Country}
               websiteUrl={Website}
             />
           );
