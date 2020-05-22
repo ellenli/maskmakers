@@ -22,7 +22,7 @@
 }
 
 .link {
-  font-family: Sofia Pro;
+  font-family: $pt-mono;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -44,7 +44,7 @@
   font-weight: bold;
 
   .celebratingContainer {
-    font-family: Sofia Pro;
+    font-family: $pt-mono;
     font-size: 16px;
     line-height: 16px;
     letter-spacing: 2px;
@@ -52,7 +52,7 @@
   }
 
   h1 {
-    font-family: Bennet Banner;
+    font-family: "bennet-banner", "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-weight: bold;
     font-size: 48px;
     line-height: 50px;
