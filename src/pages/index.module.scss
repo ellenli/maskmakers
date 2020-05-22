@@ -34,7 +34,7 @@
 
 .filterContainer {
   padding: 0 var(--page-shell-padding) var(--page-shell-padding);
-  color: $primary-purple;
+  color: #fff;
   background-color: var(--background);
   display: none;
   @media (min-width: $desktop) {
@@ -137,6 +137,11 @@
   bottom: 64px;
   left: 50%;
   transform: translateX(-50%);
+
+  button {
+    background-color: $primary-blue !important;
+  }
+
   @media (min-width: $desktop) {
     display: none;
   }
@@ -191,10 +196,10 @@
   border-top: 1px solid var(--border-gray);
   padding: 16px;
   margin-top: auto;
-  background-color: $primary-purple;
+  background-color: $primary-blue;
   
   > button {
-    background-color: $primary-purple;
+    background-color: $primary-blue;
   }
 }
 
