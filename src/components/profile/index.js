@@ -48,7 +48,7 @@ function prefaceLinkWithHTTPS(url) {
 }
 
 const Profile = props => {
-  const { image, name, location, country, websiteUrl, categories, description, usesGiftCard } = props;
+  const { image, name, location, country, websiteUrl, categories, description, usesGiftCard, photoDescription } = props;
 
   // CSS makes it easy to truncate a single line of text, but not multiple lines of text
   // const description = "Premium custom jewlery handcrafted with precision with some longer text that needs to be truncated because it is too long to show the whole thing";
@@ -78,7 +78,7 @@ const Profile = props => {
     >
       <span className={styles.profileFocusState }/>
       {giftCardBadge}
-      <div style={{ backgroundImage: `url(${image})` }} className={styles.image} />
+      <div style={{ backgroundImage: `url(${image})` }} className={styles.image} role="img" aria-label={photoDescription || ""} />
       <div className={styles.card}>
         <div>
           <h2 className={styles.name}>{name}</h2>
