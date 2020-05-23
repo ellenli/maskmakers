@@ -73,9 +73,11 @@ const Profile = props => {
       {giftCardBadge}
       <div style={{ backgroundImage: `url(${image})` }} className={styles.image} />
       <div className={styles.card}>
-        <h2 className={styles.name}>{name}</h2>
-        {locationAndCountry(location, country)}
-        <p className={styles.profileDescription}>{descriptionToDisplay}</p>
+        <div>
+          <h2 className={styles.name}>{name}</h2>
+          {locationAndCountry(location, country)}
+          <p className={styles.profileDescription}>{descriptionToDisplay}</p>
+        </div>
         <div className={styles.filterTags}>
           <div className={styles.giftCardBadge}>Gift card only</div>
           {
