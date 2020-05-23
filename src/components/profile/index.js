@@ -20,10 +20,6 @@ function locationAndCountry(location, country) {
     return (
       <p
         className={styles.item}
-        style={{
-          textIndent: "-20px",
-          paddingLeft: "20px"
-        }}
       >
         {locationAndCountryText(location, country)}
       </p>
