@@ -70,13 +70,15 @@ const Profile = props => {
 
 
   const giftCardBadge = usesGiftCard ?
-    <div className={styles.giftCardBadge}>Gift card only</div> : null
+    <div className={styles.giftCardBadge}>Gift card only</div> : null;
+
   return (
     <a
       className={styles.profile}
       href={prefaceLinkWithHTTPS(websiteUrl)}
       target="_blank"
       rel="noopener noreferrer"
+      aria-label={name}
     >
       <span className={styles.profileFocusState }/>
       {giftCardBadge}
@@ -89,14 +91,20 @@ const Profile = props => {
             {descriptionMarkup}
           </p>
         </div>
-        <div className={styles.filterTags}>
-          {giftCardBadge}
+        <dl className={styles.filterTags}>
+          {giftCardBadge ? (
+            <>
+              <dt className={styles.visuallyHiddenDescription}>{`Products currently available from ${name}:`}</dt>
+              <dd>{giftCardBadge}</dd>
+            </>
+          ) : null}
+          <dt className={styles.visuallyHiddenDescription}>{`Types of products sold by ${name}:`}</dt>
           {
             categories.length ? categories.map(category => {
-              return <div className={styles.filterTag}>{category}</div>
+              return <dd className={styles.filterTag}>{category}</dd>
             }): null
           }
-        </div>
+        </dl>
       </div>
     </a>
   );
