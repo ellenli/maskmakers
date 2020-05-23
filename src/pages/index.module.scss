@@ -138,7 +138,15 @@
   transform: translateX(-50%);
 
   button {
+    position: relative;
     background-color: $primary-blue !important;
+    border: 2px solid transparent;
+    cursor: pointer;
+
+    &:focus {
+      top: 3px;
+      border-color: #8B8CFF;
+    }
   }
 
   @media (min-width: $desktop) {
