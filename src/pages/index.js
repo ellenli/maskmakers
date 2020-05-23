@@ -51,17 +51,25 @@ const App = () => {
           node {
             recordId
             data {
-              Vertical
-              Website
-              Name
-              Country
-              Attachments {
+              vertical: Vertical
+              website: Website
+              description: Description_of_your_store
+              name: Name
+              location: City_Town
+              country: Country
+              attachments: Attachments {
                 url
               }
+              hasRetailLocation: has_retail_location
+              usesGiftCards: uses_giftcards
             }
           }
         }
         verticals: group(field: data___Vertical) {
+          fieldValue
+          totalCount
+        }
+        countries: group(field: data___Country) {
           fieldValue
           totalCount
         }
@@ -135,11 +143,11 @@ const App = () => {
       return true;
     }
 
-    const { Vertical } = designer.node.data;
+    const { vertical } = designer.node.data;
 
     if (selectedCategoriesFilters.length) {
-      return Vertical
-        ? selectedCategoriesFilters.some(filter => createId(Vertical) === filter)
+      return vertical
+        ? selectedCategoriesFilters.some(filter => createId(vertical) === filter)
         : null;
     }
 
@@ -266,22 +274,33 @@ const App = () => {
           }
 
           const { recordId } = designer;
-          const { Name, Website, location, Country, Attachments } = designer.data;
+          const { 
+            name, 
+            website, 
+            location, 
+            country, 
+            attachments, 
+            description, 
+            vertical,
+            usesGiftCards
+          } = designer.data;
           // Add a published to airtable and check below
 
-          if (recordId == null || designer == null || Attachments == null) {
+          if (recordId == null || designer == null || attachments == null) {
             return null;
           }
 
           return (
             <Profile
               key={designer.recordId}
-              image={Attachments[0].url}
-              name={Name}
-              description={designer.data.description}
+              image={attachments[0].url}
+              name={name}
+              description={description}
               location={location}
-              country={Country}
-              websiteUrl={Website}
+              country={country}
+              websiteUrl={website}
+              categories={vertical}
+              usesGiftCards={usesGiftCards}
             />
           );
         })}

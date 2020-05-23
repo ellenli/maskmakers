@@ -6,13 +6,13 @@ const MAX_DESCRIPTION_LENGTH = 80;
 function locationAndCountryText(location, country) {
   if (location && country) {
     return `${location}, ${country}`;
-  } else if (location) {
+  } if (location) {
     return location;
-  } else if (country) {
+  } if (country) {
     return country;
-  } else {
+  } 
     return "";
-  }
+  
 }
 
 function locationAndCountry(location, country) {
@@ -43,24 +43,34 @@ function truncateString(string) {
   return `${truncated}...`;
 } 
 
+function prefaceLinkWithHTTPS(url) {
+  if (url.indexOf('://') === -1) {
+    return `https://${  url}`
+  }
+
+  return url
+}
+
 const Profile = props => {
-  const { image, name, location, country, websiteUrl } = props;
+  const { image, name, location, country, websiteUrl, categories, description, usesGiftCard } = props;
 
   // CSS makes it easy to truncate a single line of text, but not multiple lines of text
-  const description = "Premium custom jewlery handcrafted with precision with some longer text that needs to be truncated because it is too long to show the whole thing";
+  // const description = "Premium custom jewlery handcrafted with precision with some longer text that needs to be truncated because it is too long to show the whole thing";
 
   const descriptionToDisplay = description.length > MAX_DESCRIPTION_LENGTH ? truncateString(description) : description;
 
 
+  const giftCardBadge = usesGiftCard ?
+    <div className={styles.giftCardBadge}>Gift card only</div> : null
   return (
     <a
       className={styles.profile}
-      href={websiteUrl}
+      href={prefaceLinkWithHTTPS(websiteUrl)}
       target="_blank"
       rel="noopener noreferrer"
     >
       <span className={styles.profileFocusState }/>
-      <div className={styles.giftCardBadge}>Gift card only</div>
+      {giftCardBadge}
       <div style={{ backgroundImage: `url(${image})` }} className={styles.image} />
       <div className={styles.card}>
         <h2 className={styles.name}>{name}</h2>
@@ -68,8 +78,11 @@ const Profile = props => {
         <p className={styles.profileDescription}>{descriptionToDisplay}</p>
         <div className={styles.filterTags}>
           <div className={styles.giftCardBadge}>Gift card only</div>
-          <div className={styles.filterTag}>Tag</div>
-          <div className={styles.filterTag}>Tag</div>
+          {
+            categories.length ? categories.map(category => {
+              return <div className={styles.filterTag}>{category}</div>
+            }): null
+          }
         </div>
       </div>
     </a>

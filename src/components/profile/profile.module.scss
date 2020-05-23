@@ -197,3 +197,12 @@
   color: #3B477E;
   margin-right: 10px;
 }
+
+.description {
+  margin-top: 14px;
+  max-height: 32px;
+  line-height: 16px;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
