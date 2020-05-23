@@ -57,7 +57,16 @@ const Profile = props => {
   // CSS makes it easy to truncate a single line of text, but not multiple lines of text
   // const description = "Premium custom jewlery handcrafted with precision with some longer text that needs to be truncated because it is too long to show the whole thing";
 
-  const descriptionToDisplay = description.length > MAX_DESCRIPTION_LENGTH ? truncateString(description) : description;
+  const truncateDescription = description.length > MAX_DESCRIPTION_LENGTH;
+
+  const descriptionToDisplay = truncateDescription ? truncateString(description) : description;
+
+  const descriptionMarkup = truncateDescription ? (
+    <>
+      <span className={styles.visuallyHiddenDescription}>{description}</span>
+      <span aria-hidden>{descriptionToDisplay}</span>
+    </>
+  ) : descriptionToDisplay;
 
 
   const giftCardBadge = usesGiftCard ?
@@ -76,7 +85,9 @@ const Profile = props => {
         <div>
           <h2 className={styles.name}>{name}</h2>
           {locationAndCountry(location, country)}
-          <p className={styles.profileDescription}>{descriptionToDisplay}</p>
+          <p className={styles.profileDescription}>
+            {descriptionMarkup}
+          </p>
         </div>
         <div className={styles.filterTags}>
           {giftCardBadge}
