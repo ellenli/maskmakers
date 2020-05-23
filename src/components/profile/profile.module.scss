@@ -107,6 +107,7 @@
   color: #3B477E;
   text-transform: capitalize;
 }
+
 .profile:hover,
 .profile:focus {
   margin: 2px 0px 3px 0px;
@@ -151,6 +152,7 @@
 .filterTag {
   padding: 5px;
   border-radius: 5px;
+  margin-top: 8px;
 }
 
 .giftCardBadge {
@@ -183,7 +185,7 @@
 
 .filterTags {
   display: flex;
-  margin-top: 40px;
+  margin-top: 30px;
   align-items: baseline;
   flex-wrap: wrap;
   font-size: 12px;
