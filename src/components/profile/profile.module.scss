@@ -11,7 +11,6 @@
   --profile-font-color: #000;
   font-size: 16px;
   border-radius: 20px;
-  border: 3px hidden;
   text-decoration: none;
   box-shadow: 0px 3px 0px 0px rgba(69, 113, 177, 0.8);
   margin: 0px 0px 5px 0px;
@@ -53,6 +52,16 @@
     display: flex;
     flex-direction: column;
   }
+}
+
+.profileFocusState {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: 3px solid transparent;
+  border-radius: 20px;
 }
 
 .image {
@@ -97,17 +106,29 @@
 }
 .profile:hover,
 .profile:focus {
-  box-shadow: 0px 3px 0px 0px rgba(69, 113, 177, 1);
   margin: 2px 0px 3px 0px;
 }
-.profile:active {
-  box-shadow: 0px 1px 0px 0px rgba(69, 113, 177, 1);
-  margin: 4px 0px 1px 0px;
+
+.profile:hover {
+  box-shadow: 0px 3px 0px 0px rgba(69, 113, 177, 1);
 }
 
 .profile:focus {
   outline: none;
-  border: 3px solid rgba(69, 113, 177, 1);
+  box-shadow: 0px 3px 0px 0px rgba(69, 113, 177, 0);
+
+  .profileFocusState {
+    border-color: #4571b1;
+  }
+}
+
+.profile:active {
+  box-shadow: 0px 1px 0px 0px rgba(69, 113, 177, 1);
+  margin: 4px 0px 1px 0px;
+
+  .profileFocusState {
+    border-color: transparent;
+  }
 }
 
 .linkText {
