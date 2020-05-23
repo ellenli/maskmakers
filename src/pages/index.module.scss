@@ -35,11 +35,9 @@
 .filterContainer {
   padding: 0 var(--page-shell-padding) var(--page-shell-padding);
   color: #fff;
-  background-color: var(--background);
   display: none;
   @media (min-width: $desktop) {
     display: block;
-    --background: var(--white);
     --text: $primary-purple;
     position: static;
     transform: translateX(0);
