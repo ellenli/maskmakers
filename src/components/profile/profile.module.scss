@@ -77,6 +77,9 @@
 
 .card {
   flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background-color: #fff;
   padding: 15px;
   color: var(--profile-font-color);
@@ -165,7 +168,7 @@
 
 .profileDescription {
   font-size: 12px;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .filterTags {
