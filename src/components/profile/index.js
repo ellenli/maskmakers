@@ -79,7 +79,7 @@ const Profile = props => {
           <p className={styles.profileDescription}>{descriptionToDisplay}</p>
         </div>
         <div className={styles.filterTags}>
-          <div className={styles.giftCardBadge}>Gift card only</div>
+          {giftCardBadge}
           {
             categories.length ? categories.map(category => {
               return <div className={styles.filterTag}>{category}</div>
