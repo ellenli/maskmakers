@@ -59,6 +59,7 @@ const Profile = props => {
       target="_blank"
       rel="noopener noreferrer"
     >
+      <span className={styles.profileFocusState }/>
       <div className={styles.giftCardBadge}>Gift card only</div>
       <div style={{ backgroundImage: `url(${image})` }} className={styles.image} />
       <div className={styles.card}>
