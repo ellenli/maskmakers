@@ -31,6 +31,21 @@
   color: #fff;
   position: relative;
   border: none;
+  outline: none;
+
+  &:focus {
+    text-decoration: underline;
+  }
+}
+
+header .link {
+  &:focus {
+    text-decoration: none;
+
+    .titleContainer {
+      border-bottom: 4px solid #fff;
+    }
+  }
 }
 
 .filterButton {
@@ -42,14 +57,7 @@
 .titleContainer {
   color: #FFFFFF;
   font-weight: bold;
-
-  .celebratingContainer {
-    font-family: $pt-mono;
-    font-size: 16px;
-    line-height: 16px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
+  border-bottom: 4px solid transparent;
 
   h1 {
     font-family: "bennet-banner", "Palatino Linotype", "Book Antiqua", Palatino, serif;
@@ -57,6 +65,15 @@
     font-size: 48px;
     line-height: 50px;
     letter-spacing: 0.25px;
+    padding-bottom: 10px;
   }
 
+  .celebratingContainer {
+    font-family: $pt-mono;
+    font-size: 16px;
+    line-height: 35px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: block;
+  }
 }
