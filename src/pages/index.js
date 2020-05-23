@@ -62,6 +62,7 @@ const App = () => {
               }
               hasRetailLocation: has_retail_location
               usesGiftCards: uses_giftcards
+              photoDescription: photo_description
             }
           }
         }
@@ -282,7 +283,8 @@ const App = () => {
             attachments, 
             description, 
             vertical,
-            usesGiftCards
+            usesGiftCards,
+            photoDescription
           } = designer.data;
           // Add a published to airtable and check below
 
@@ -301,6 +303,7 @@ const App = () => {
               websiteUrl={website}
               categories={vertical}
               usesGiftCards={usesGiftCards}
+              photoDescription={photoDescription}
             />
           );
         })}
