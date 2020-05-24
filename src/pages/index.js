@@ -27,8 +27,9 @@ const createCategory = (value, type, count) => {
   return {
     title: value,
     id: createId(value),
-    vertical: type === "vertical",
+    categories: type === "categories",
     country: type === "country",
+    features: type === "features",
     count
   };
 };
@@ -51,7 +52,7 @@ const App = () => {
           node {
             recordId
             data {
-              vertical: Vertical
+              categories: Vertical
               website: Website
               description: Description_of_your_store
               name: Name
@@ -61,16 +62,24 @@ const App = () => {
                 url
               }
               hasRetailLocation: has_retail_location
-              usesGiftCards: uses_giftcards
+              usesGiftCards: uses_giftcard
               photoDescription: photo_description
             }
           }
         }
-        verticals: group(field: data___Vertical) {
+        categories: group(field: data___Vertical) {
           fieldValue
           totalCount
         }
         countries: group(field: data___Country) {
+          fieldValue
+          totalCount
+        }
+        hasRetailLocation: group(field: data___has_retail_location) {
+          fieldValue
+          totalCount
+        }
+        usesGiftCards: group(field: data___uses_giftcard) {
           fieldValue
           totalCount
         }
@@ -79,7 +88,7 @@ const App = () => {
   `);
 
   const [isLoading, setIsLoading] = useState(true);
-  const [visibleDesigners, setVisibleDesigners] = useState([]);
+  const [visibleMerchants, setVisibleMerchants] = useState([]);
 
   const [selectedCountryFilter, setSelectedCountryFilter] = useState(null);
   const [selectedLocationFilters, setSelectedLocationFilters] = useState([]);
@@ -98,14 +107,15 @@ const App = () => {
   const filterCategoryTypes = [
     { name: "Location", id: "country" },
     { name: "City/state", id: "location" },
-    { name: "Categories", id: "vertical" }
+    { name: "Categories", id: "categories" },
+    { name: "More", id: "features"}
   ];
 
   // dynamically create categories from location and country fields in database
   // if this ever causes issue, revert back to manual creation of these categories
   // ---
-  data.allAirtable.verticals.map(vertical => {
-    const category = createCategory(vertical.fieldValue, "vertical", vertical.totalCount);
+  data.allAirtable.categories.map(airtableCategory => {
+    const category = createCategory(airtableCategory.fieldValue, "categories", airtableCategory.totalCount);
     return categories.push(category);
   })
   // data.allAirtable.locations.map(location => {
@@ -113,10 +123,10 @@ const App = () => {
   //   return categories.push(category);
   // });
 
-  // data.allAirtable.countries.map(country => {
-  //   const category = createCategory(country.fieldValue, "country", country.totalCount);
-  //   return categories.push(category);
-  // });
+  data.allAirtable.countries.map(country => {
+    const category = createCategory(country.fieldValue, "country", country.totalCount);
+    return categories.push(category);
+  });
   // ---
 
   // create hash and relationship of countries and locations within countries
@@ -130,33 +140,55 @@ const App = () => {
   });
   // ---
 
+  // add special categories
+  // ---
+  categories.push(createCategory("Gift card only", "features", 1))
+  categories.push(createCategory("Has retail location", "features", 1))
+  // ---
+
   useEffect(() => {
     const shuffledDesigners = shuffle(data.allAirtable.edges);
-    setVisibleDesigners(shuffledDesigners);
+    setVisibleMerchants(shuffledDesigners);
     setIsLoading(false);
   }, [data.allAirtable.edges]);
 
   const numDesignersPerPage = 52;
   const numPagesToShowInPagination = 10;
 
-  const filteredDesigners = visibleDesigners.filter(designer => {
+  function merchantBelongsToSelectedCountry(merchant) {
+    if (!selectedCountryFilter) {
+      return true
+    }
+
+    const { country } = merchant;
+
+    return country ? createId(country) === selectedCountryFilter : null
+  }
+
+  function merchantBelongsToSelectedCategories(merchant) {
     if (!selectedCategoriesFilters.length) {
       return true;
     }
 
-    const { vertical } = designer.node.data;
+    const { categories } = merchant;
 
-    if (selectedCategoriesFilters.length) {
-      return vertical
-        ? selectedCategoriesFilters.some(filter => createId(vertical) === filter)
+    const categoryIds = categories.map(category => createId(category))
+    return categoryIds.length
+        ? selectedCategoriesFilters.some(filter => categoryIds.includes(filter))
         : null;
+  }
+
+  const filteredMerchants = visibleMerchants.filter(merchant => {
+    if (!selectedCategoriesFilters.length && !selectedCountryFilter) {
+      return true;
     }
 
-    // return Vertical ? createId(Vertical) === selectedCategoriesFilter : null;
+    return merchantBelongsToSelectedCategories(merchant.node.data) && 
+      merchantBelongsToSelectedCountry(merchant.node.data, selectedCountryFilter);
   });
 
   const pagination = paginate(
-    filteredDesigners.length,
+    filteredMerchants.length,
     currentPage,
     numDesignersPerPage,
     numPagesToShowInPagination
@@ -178,7 +210,7 @@ const App = () => {
         );
 
         // hide location filters if country not selected
-        if (selectedCountryFilter == null && section.id === "location") {
+        if (section.id === "location") {
           return null;
         }
 
@@ -247,9 +279,22 @@ const App = () => {
                       setSelectedLocationFilters(newSelectedLocationFilters);
                     }
 
+                    if (category.categories) {
+                      const newSelectedCategoryFilters = [...selectedCategoriesFilters];
+
+                      if (isChecked) {
+                        newSelectedCategoryFilters.push(categoryId);
+                      } else {
+                        const i = newSelectedCategoryFilters.indexOf(categoryId);
+                        newSelectedCategoryFilters.splice(i, 1);
+                      }
+
+                      setSelectedCategoriesFilters(newSelectedCategoryFilters);
+                    }
+
                     setCurrentPage(1);
                   }}
-                  isChecked={selectedLocationFilters.includes(category.id)}
+                  isChecked={selectedCategoriesFilters.includes(category.id)}
                   className={styles.filterItemInput}
                   title={category.title}
                   count={category.count}
@@ -269,12 +314,12 @@ const App = () => {
           [styles.profiles]: true
         })}
       >
-        {filteredDesigners.map(({ node: designer }, i) => {
+        {filteredMerchants.map(({ node: merchant }, i) => {
           if (i < pagination.startIndex || i > pagination.endIndex) {
             return null;
           }
 
-          const { recordId } = designer;
+          const { recordId } = merchant;
           const { 
             name, 
             website, 
@@ -282,26 +327,27 @@ const App = () => {
             country, 
             attachments, 
             description, 
-            vertical,
+            categories,
             usesGiftCards,
             photoDescription
-          } = designer.data;
+          } = merchant.data;
+
           // Add a published to airtable and check below
 
-          if (recordId == null || designer == null || attachments == null) {
+          if (recordId == null || merchant == null || attachments == null) {
             return null;
           }
 
           return (
             <Profile
-              key={designer.recordId}
+              key={merchant.recordId}
               image={attachments[0].url}
               name={name}
               description={description}
               location={location}
               country={country}
               websiteUrl={website}
-              categories={vertical}
+              categories={categories}
               usesGiftCards={usesGiftCards}
               photoDescription={photoDescription}
             />
@@ -438,7 +484,7 @@ const App = () => {
               );
 
               // hide location filters if country not selected
-              if (selectedCountryFilter == null && section.id === "location") {
+              if (section.id === "location") {
                 return null;
               }
 
@@ -508,9 +554,22 @@ const App = () => {
                             setSelectedLocationFilters(newSelectedLocationFilters);
                           }
 
+                          if (category.categories) {
+                            const newSelectedCategoryFilters = [...selectedCategoriesFilters];
+      
+                            if (isChecked) {
+                              newSelectedCategoryFilters.push(categoryId);
+                            } else {
+                              const i = newSelectedCategoryFilters.indexOf(categoryId);
+                              newSelectedCategoryFilters.splice(i, 1);
+                            }
+      
+                            setSelectedCategoriesFilters(newSelectedCategoryFilters);
+                          }
+
                           setCurrentPage(1);
                         }}
-                        isChecked={selectedLocationFilters.includes(category.id)}
+                        isChecked={selectedCategoriesFilters.includes(category.id)}
                         className={styles.filterItemInput}
                         title={category.title}
                         count={category.count}

@@ -50,7 +50,7 @@ module.exports = {
             baseId: process.env.AIRTABLE_BASE_ID,
             tableName: "FORM",
             defaultValues: {
-              uses_giftcards: false,
+              uses_giftcard: false,
               has_retail_location: false,
             },
           }
