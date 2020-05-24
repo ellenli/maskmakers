@@ -11,6 +11,7 @@ import FilterItem from "../components/filter-item";
 import CountryFilterItem from "../components/country-filter-item";
 import Nav from "../components/nav";
 import Loader from "../components/loader";
+import NoResultsFound from "../components/no-results-found";
 import paginate from "../paginate";
 import "@reach/dialog/styles.css";
 import styles from "./index.module.scss";
@@ -309,7 +310,34 @@ const App = () => {
     </div>
   );
 
-  const pageBody = (
+  const filterButton = (
+    <div className={styles.filterButtonContainer}>
+      <Button
+        type="button"
+        onClick={open}
+        fullWidth={false}
+        style={{
+          backgroundColor: "#6362fc",
+          borderRadius: "8px",
+          boxShadow: "2px 4px 10px rgba(0, 0, 0, 0.2)"
+        }}
+      >
+        <FilterIcon /> Filter
+        {selectedCountryFilter && (
+          <>
+            <span>·</span> <span>{1 + selectedLocationFilters.length}</span>
+          </>
+        )}
+      </Button>
+    </div>
+  );
+
+  const pageBody = !filteredMerchants.length ? (
+    <>
+      <NoResultsFound />
+      {filterButton}
+    </>
+  ) : (
     <>
       <div
         className={classnames({
@@ -431,25 +459,7 @@ const App = () => {
           →
         </button>
       </div>
-      <div className={styles.filterButtonContainer}>
-        <Button
-          type="button"
-          onClick={open}
-          fullWidth={false}
-          style={{
-            backgroundColor: "#6362fc",
-            borderRadius: "8px",
-            boxShadow: "2px 4px 10px rgba(0, 0, 0, 0.2)"
-          }}
-        >
-          <FilterIcon /> Filter
-          {selectedCountryFilter && (
-            <>
-              <span>·</span> <span>{1 + selectedLocationFilters.length}</span>
-            </>
-          )}
-        </Button>
-      </div>
+      {filterButton}
     </>
   );
 
