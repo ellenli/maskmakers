@@ -502,92 +502,94 @@ const App = () => {
 
               return (
                 <div key={section.id}>
-                  <h3 className={styles.filterCategoryTitle}>{section.name}</h3>
-                  {sortedCategoriesInSection.map(category => {
-                    if (category.location) {
-                      // show locations for selected country only
-                      const selectedCountryAndLocationObj = countryAndLocations.find(
-                        obj => obj.location === category.id
-                      );
+                  <fieldset>
+                    <legend><h3 className={styles.filterCategoryTitle}>{section.name}</h3></legend>
+                    {sortedCategoriesInSection.map(category => {
+                      if (category.location) {
+                        // show locations for selected country only
+                        const selectedCountryAndLocationObj = countryAndLocations.find(
+                          obj => obj.location === category.id
+                        );
 
-                      if (
-                        selectedCountryFilter !== selectedCountryAndLocationObj.country
-                      ) {
-                        return null;
+                        if (
+                          selectedCountryFilter !== selectedCountryAndLocationObj.country
+                        ) {
+                          return null;
+                        }
                       }
-                    }
 
-                    return category.country ? (
-                      <CountryFilterItem
-                        key={category.id}
-                        id={category.id}
-                        type="pill"
-                        onChange={e => {
-                          const categoryId = e.target.value;
+                      return category.country ? (
+                        <CountryFilterItem
+                          key={category.id}
+                          id={category.id}
+                          type="pill"
+                          onChange={e => {
+                            const categoryId = e.target.value;
 
-                          setSelectedCountryFilter(categoryId);
-                          setCurrentPage(1);
-                        }}
-                        onClick={e => {
-                          const categoryId = e.target.value;
-
-                          // deselect country when clicked again
-                          if (categoryId === selectedCountryFilter) {
-                            setSelectedCountryFilter(null);
+                            setSelectedCountryFilter(categoryId);
                             setCurrentPage(1);
-                          }
-                        }}
-                        isChecked={selectedCountryFilter === category.id}
-                        className={styles.filterItemInput}
-                        title={category.title}
-                        count={category.count}
-                      />
-                    ) : (
-                      <FilterItem
-                        key={category.id}
-                        id={category.id}
-                        type="pill"
-                        onChange={e => {
-                          const categoryId = e.target.value;
-                          const isChecked = e.target.checked;
+                          }}
+                          onClick={e => {
+                            const categoryId = e.target.value;
 
-                          if (category.location) {
-                            const newSelectedLocationFilters = [
-                              ...selectedLocationFilters
-                            ];
+                            // deselect country when clicked again
+                            if (categoryId === selectedCountryFilter) {
+                              setSelectedCountryFilter(null);
+                              setCurrentPage(1);
+                            }
+                          }}
+                          isChecked={selectedCountryFilter === category.id}
+                          className={styles.filterItemInput}
+                          title={category.title}
+                          count={category.count}
+                        />
+                      ) : (
+                        <FilterItem
+                          key={category.id}
+                          id={category.id}
+                          type="pill"
+                          onChange={e => {
+                            const categoryId = e.target.value;
+                            const isChecked = e.target.checked;
 
-                            if (isChecked) {
-                              newSelectedLocationFilters.push(categoryId);
-                            } else {
-                              const i = newSelectedLocationFilters.indexOf(categoryId);
-                              newSelectedLocationFilters.splice(i, 1);
+                            if (category.location) {
+                              const newSelectedLocationFilters = [
+                                ...selectedLocationFilters
+                              ];
+
+                              if (isChecked) {
+                                newSelectedLocationFilters.push(categoryId);
+                              } else {
+                                const i = newSelectedLocationFilters.indexOf(categoryId);
+                                newSelectedLocationFilters.splice(i, 1);
+                              }
+
+                              setSelectedLocationFilters(newSelectedLocationFilters);
                             }
 
-                            setSelectedLocationFilters(newSelectedLocationFilters);
-                          }
-
-                          if (category.categories) {
-                            const newSelectedCategoryFilters = [...selectedCategoriesFilters];
-      
-                            if (isChecked) {
-                              newSelectedCategoryFilters.push(categoryId);
-                            } else {
-                              const i = newSelectedCategoryFilters.indexOf(categoryId);
-                              newSelectedCategoryFilters.splice(i, 1);
+                            if (category.categories) {
+                              const newSelectedCategoryFilters = [...selectedCategoriesFilters];
+        
+                              if (isChecked) {
+                                newSelectedCategoryFilters.push(categoryId);
+                              } else {
+                                const i = newSelectedCategoryFilters.indexOf(categoryId);
+                                newSelectedCategoryFilters.splice(i, 1);
+                              }
+        
+                              setSelectedCategoriesFilters(newSelectedCategoryFilters);
                             }
-      
-                            setSelectedCategoriesFilters(newSelectedCategoryFilters);
-                          }
 
-                          setCurrentPage(1);
-                        }}
-                        isChecked={selectedCategoriesFilters.includes(category.id)}
-                        className={styles.filterItemInput}
-                        title={category.title}
-                        count={category.count}
-                      />
-                    );
-                  })}
+                            setCurrentPage(1);
+                          }}
+                          isChecked={selectedCategoriesFilters.includes(category.id)}
+                          className={styles.filterItemInput}
+                          title={category.title}
+                          count={category.count}
+                        />
+                      );
+                    })}
+                  </fieldset>
                 </div>
               );
             })}
