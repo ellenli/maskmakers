@@ -106,10 +106,10 @@ const App = () => {
   const profileContainerRef = useRef();
 
   const filterCategoryTypes = [
-    { name: "Location", id: "country" },
-    { name: "City/state", id: "location" },
-    { name: "Categories", id: "categories" },
-    { name: "More", id: "features"}
+    { name: "Location", id: "country", description: "Filter merchants by country" },
+    { name: "City/state", id: "location", description: "Filter merchants by city or state" },
+    { name: "Categories", id: "categories", description: "Filter merchants by product type" },
+    { name: "More", id: "features", description: "Other filters"}
   ];
 
   // dynamically create categories from location and country fields in database
@@ -217,8 +217,9 @@ const App = () => {
 
         return (
           <div key={section.id}>
+            <h3 className={styles.filterCategoryTitle}>{section.name}</h3>
             <fieldset>
-              <legend><h3 className={styles.filterCategoryTitle}>{section.name}</h3></legend>
+              <legend className={styles.visuallyHidden}>{section.description}</legend>
               {sortedCategoriesInSection.map(category => {
                 if (category.location) {
                   // show locations for selected country only
@@ -502,8 +503,9 @@ const App = () => {
 
               return (
                 <div key={section.id}>
+                  <h3 className={styles.filterCategoryTitle} aria-hidden>{section.name}</h3>
                   <fieldset>
-                    <legend><h3 className={styles.filterCategoryTitle}>{section.name}</h3></legend>
+                    <legend className={styles.visuallyHidden}>{section.description}</legend>
                     {sortedCategoriesInSection.map(category => {
                       if (category.location) {
                         // show locations for selected country only
