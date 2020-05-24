@@ -18,15 +18,15 @@ const Layout = ({ children }) => (
           content:
             "A directory of Asian Shopify merchants."
         },
-
-        {
-          property: "og:image",
-          content: "https://maskmakers.club/opengraph.png"
-        },
-        {
-          property: "og:url",
-          content: "https://maskmakers.club"
-        },
+        // commenting out until we have a preview img
+        // {
+        //   property: "og:image",
+        //   content: "https://maskmakers.club/opengraph.png"
+        // },
+        // {
+        //   property: "og:url",
+        //   content: "https://maskmakers.club"
+        // },
         { property: "og:type", content: "website" },
         { property: "og:site_name", content: "Asian Heritage Month Marketplace" },
       ]}
