@@ -24,7 +24,7 @@ const createId = value => {
   return value.replace(/\s+/g, "-").toLowerCase();
 };
 
-const createCategory = (value, type, count) => {
+const createCategory = (value, type, count = 0) => {
   return {
     title: value,
     id: createId(value),
@@ -144,8 +144,8 @@ const App = () => {
 
   // add special categories
   // ---
-  categories.push(createCategory("Gift card only", "features", 1))
-  categories.push(createCategory("Has retail location", "features", 1))
+  categories.push(createCategory("Gift card only", "features"))
+  categories.push(createCategory("Has retail location", "features"))
   // ---
 
   useEffect(() => {
