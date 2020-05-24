@@ -57,16 +57,11 @@ const Profile = props => {
 
   const descriptionToDisplay = truncateDescription ? truncateString(description) : description;
 
-  const descriptionMarkup = truncateDescription ? (
-    <>
-      <span className={styles.visuallyHiddenDescription}>{description}</span>
-      <span aria-hidden>{descriptionToDisplay}</span>
-    </>
-  ) : descriptionToDisplay;
-
-
   const giftCardBadge = usesGiftCards ?
-    <div className={styles.giftCardBadge}>Gift card only</div> : null
+    <div className={styles.giftCardBadge}>Gift card only</div> : null;
+
+  const linkDescriptionID = `${name.toLowerCase().replace(/[^\w]/gi, '')}-description`;
+
   return (
     <a
       className={styles.profile}
@@ -74,16 +69,20 @@ const Profile = props => {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={name}
+      aria-describedby={linkDescriptionID}
     >
       <span className={styles.profileFocusState }/>
       {giftCardBadge}
       <div style={{ backgroundImage: `url(${image})` }} className={styles.image} role="img" aria-label={photoDescription || ""} />
-      <div className={styles.card}>
+      <span id={linkDescriptionID} className={styles.visuallyHiddenDescription}>
+        {`Located in ${locationAndCountryText(location, country)}. ${usesGiftCards ? 'Only setting gift cards.' : ''} ${description}`}
+      </span>
+      <div className={styles.card} aria-hidden>
         <div>
           <h2 className={styles.name}>{name}</h2>
           {locationAndCountry(location, country)}
           <p className={styles.profileDescription}>
-            {descriptionMarkup}
+            {descriptionToDisplay}
           </p>
         </div>
         <dl className={styles.filterTags}>
