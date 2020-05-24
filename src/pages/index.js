@@ -94,6 +94,7 @@ const App = () => {
   const [selectedCountryFilter, setSelectedCountryFilter] = useState(null);
   const [selectedLocationFilters, setSelectedLocationFilters] = useState([]);
   const [selectedCategoriesFilters, setSelectedCategoriesFilters] = useState([]);
+  const [selectedFeaturesFilter, setSelectedFeaturesFilter] = useState([]);
 
   const [isFilterListVisible, setIsFilterListVisible] = useState(false);
 
@@ -179,13 +180,22 @@ const App = () => {
         : null;
   }
 
-  const filteredMerchants = visibleMerchants.filter(merchant => {
-    if (!selectedCategoriesFilters.length && !selectedCountryFilter) {
+  function merchantBelongsToSelectedFeatures(merchant) {
+    if (!selectedFeaturesFilter.length) {
       return true;
     }
 
+
+    const  { usesGiftCards, hasRetailLocation } = merchant
+
+    return (selectedFeaturesFilter.includes('gift-card-only') && usesGiftCards) || 
+      (selectedFeaturesFilter.includes('has-retail-location') && hasRetailLocation)
+  }
+
+  const filteredMerchants = visibleMerchants.filter(merchant => {
     return merchantBelongsToSelectedCategories(merchant.node.data) && 
-      merchantBelongsToSelectedCountry(merchant.node.data, selectedCountryFilter);
+      merchantBelongsToSelectedCountry(merchant.node.data, selectedCountryFilter) &&
+      merchantBelongsToSelectedFeatures(merchant.node.data);
   });
 
   const pagination = paginate(
@@ -295,9 +305,22 @@ const App = () => {
                         setSelectedCategoriesFilters(newSelectedCategoryFilters);
                       }
 
+                      if (category.features) {
+                        const newSelectedFeatureFilters = [...selectedFeaturesFilter];
+  
+                        if (isChecked) {
+                          newSelectedFeatureFilters.push(categoryId);
+                        } else {
+                          const i = newSelectedFeatureFilters.indexOf(categoryId);
+                          newSelectedFeatureFilters.splice(i, 1);
+                        }
+  
+                        setSelectedFeaturesFilter(newSelectedFeatureFilters);
+                      }
+
                       setCurrentPage(1);
                     }}
-                    isChecked={selectedCategoriesFilters.includes(category.id)}
+                    isChecked={selectedCategoriesFilters.includes(category.id) || selectedFeaturesFilter.includes(category.id) }
                     className={styles.filterItemInput}
                     title={category.title}
                     count={category.count}
@@ -582,9 +605,22 @@ const App = () => {
                               setSelectedCategoriesFilters(newSelectedCategoryFilters);
                             }
 
+                            if (category.features) {
+                              const newSelectedFeatureFilters = [...selectedFeaturesFilter];
+        
+                              if (isChecked) {
+                                newSelectedFeatureFilters.push(categoryId);
+                              } else {
+                                const i = newSelectedFeatureFilters.indexOf(categoryId);
+                                newSelectedFeatureFilters.splice(i, 1);
+                              }
+        
+                              setSelectedFeaturesFilter(newSelectedFeatureFilters);
+                            }
+
                             setCurrentPage(1);
                           }}
-                          isChecked={selectedCategoriesFilters.includes(category.id)}
+                          isChecked={selectedCategoriesFilters.includes(category.id) || selectedFeaturesFilter.includes(category.id) }
                           className={styles.filterItemInput}
                           title={category.title}
                           count={category.count}
