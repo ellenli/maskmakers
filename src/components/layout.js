@@ -5,18 +5,18 @@ import "../styles/index.scss";
 const Layout = ({ children }) => (
   <>
     <Helmet
-      title="Mask Makers Club"
+      title="Asian Heritage Month Marketplace"
       meta={[
         {
           property: "description",
           content:
-            "A global directory of mask makers. Join the club. #MaskMakersClub"
+            "A directory of Asian Shopify merchants."
         },
-        { property: "og:title", content: "Mask Makers Club" },
+        { property: "og:title", content: "Asian Heritage Month Marketplace" },
         {
           property: "og:description",
           content:
-            "A global directory of mask makers. Join the club. #MaskMakersClub"
+            "A directory of Asian Shopify merchants."
         },
 
         {
@@ -28,14 +28,7 @@ const Layout = ({ children }) => (
           content: "https://maskmakers.club"
         },
         { property: "og:type", content: "website" },
-        { property: "og:site_name", content: "Mask Makers Club" },
-        { property: "twitter:site", content: "@maskmakersclub" },
-        { property: "twitter:creator", content: "@ellenxli" },
-        { property: "twitter:card", content: "summary_large_image" },
-        {
-          property: "twitter:image",
-          content: "https://maskmakers.club/opengraph.png"
-        }
+        { property: "og:site_name", content: "Asian Heritage Month Marketplace" },
       ]}
     />
     {children}
