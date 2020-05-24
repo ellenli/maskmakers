@@ -24,7 +24,7 @@ const createId = value => {
   return value.replace(/\s+/g, "-").toLowerCase();
 };
 
-const createCategory = (value, type, count) => {
+const createCategory = (value, type, count = 0) => {
   return {
     title: value,
     id: createId(value),
@@ -94,6 +94,7 @@ const App = () => {
   const [selectedCountryFilter, setSelectedCountryFilter] = useState(null);
   const [selectedLocationFilters, setSelectedLocationFilters] = useState([]);
   const [selectedCategoriesFilters, setSelectedCategoriesFilters] = useState([]);
+  const [selectedFeaturesFilter, setSelectedFeaturesFilter] = useState([]);
 
   const [isFilterListVisible, setIsFilterListVisible] = useState(false);
 
@@ -143,8 +144,8 @@ const App = () => {
 
   // add special categories
   // ---
-  categories.push(createCategory("Gift card only", "features", 1))
-  categories.push(createCategory("Has retail location", "features", 1))
+  categories.push(createCategory("Gift card only", "features"))
+  categories.push(createCategory("Has retail location", "features"))
   // ---
 
   useEffect(() => {
@@ -179,13 +180,22 @@ const App = () => {
         : null;
   }
 
-  const filteredMerchants = visibleMerchants.filter(merchant => {
-    if (!selectedCategoriesFilters.length && !selectedCountryFilter) {
+  function merchantBelongsToSelectedFeatures(merchant) {
+    if (!selectedFeaturesFilter.length) {
       return true;
     }
 
+
+    const  { usesGiftCards, hasRetailLocation } = merchant
+
+    return (selectedFeaturesFilter.includes('gift-card-only') && usesGiftCards) || 
+      (selectedFeaturesFilter.includes('has-retail-location') && hasRetailLocation)
+  }
+
+  const filteredMerchants = visibleMerchants.filter(merchant => {
     return merchantBelongsToSelectedCategories(merchant.node.data) && 
-      merchantBelongsToSelectedCountry(merchant.node.data, selectedCountryFilter);
+      merchantBelongsToSelectedCountry(merchant.node.data, selectedCountryFilter) &&
+      merchantBelongsToSelectedFeatures(merchant.node.data);
   });
 
   const pagination = paginate(
@@ -295,9 +305,22 @@ const App = () => {
                         setSelectedCategoriesFilters(newSelectedCategoryFilters);
                       }
 
+                      if (category.features) {
+                        const newSelectedFeatureFilters = [...selectedFeaturesFilter];
+  
+                        if (isChecked) {
+                          newSelectedFeatureFilters.push(categoryId);
+                        } else {
+                          const i = newSelectedFeatureFilters.indexOf(categoryId);
+                          newSelectedFeatureFilters.splice(i, 1);
+                        }
+  
+                        setSelectedFeaturesFilter(newSelectedFeatureFilters);
+                      }
+
                       setCurrentPage(1);
                     }}
-                    isChecked={selectedCategoriesFilters.includes(category.id)}
+                    isChecked={selectedCategoriesFilters.includes(category.id) || selectedFeaturesFilter.includes(category.id) }
                     className={styles.filterItemInput}
                     title={category.title}
                     count={category.count}
@@ -362,8 +385,6 @@ const App = () => {
             usesGiftCards,
             photoDescription
           } = merchant.data;
-
-          // Add a published to airtable and check below
 
           if (recordId == null || merchant == null || attachments == null) {
             return null;
@@ -582,9 +603,22 @@ const App = () => {
                               setSelectedCategoriesFilters(newSelectedCategoryFilters);
                             }
 
+                            if (category.features) {
+                              const newSelectedFeatureFilters = [...selectedFeaturesFilter];
+        
+                              if (isChecked) {
+                                newSelectedFeatureFilters.push(categoryId);
+                              } else {
+                                const i = newSelectedFeatureFilters.indexOf(categoryId);
+                                newSelectedFeatureFilters.splice(i, 1);
+                              }
+        
+                              setSelectedFeaturesFilter(newSelectedFeatureFilters);
+                            }
+
                             setCurrentPage(1);
                           }}
-                          isChecked={selectedCategoriesFilters.includes(category.id)}
+                          isChecked={selectedCategoriesFilters.includes(category.id) || selectedFeaturesFilter.includes(category.id) }
                           className={styles.filterItemInput}
                           title={category.title}
                           count={category.count}

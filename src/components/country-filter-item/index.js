@@ -30,7 +30,6 @@ const CountryFilterItem = ({ isChecked, onChange, onClick, title, id, type, coun
       <label htmlFor={id} className={labelStyles}>
         {type === "row" && <>{isChecked ? <CircleCheckIcon /> : <CircleIcon />}</>}
         <span className={styles.labelTitle}>{title}</span>
-        {type === "row" && <span className={styles.count}>{count}</span>}
       </label>
     </span>
   );

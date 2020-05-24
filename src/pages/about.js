@@ -28,7 +28,7 @@ const About = () => (
 
           <h2 className={styles.subheading}>About the initiative</h2>
           <p className={styles.about}>
-            This director is a project started by the Asian Employee Resource Group at Shopify: Leanne Macaspac, Lisa Vanderschuit, Peter Ho, John Oh, Yosha Khan, Aman Biswas, Maple Ong, Carolynn Nguyen.
+            This directory is a project started by the Asian Employee Resource Group at Shopify: Leanne Macaspac, Lisa Vanderschuit, Peter Ho, John Oh, Yosha Khan, Aman Biswas, Maple Ong, Carolynn Nguyen.
             <br /><br />
             Special thank you to our community friends, <a target="_blank" rel="noopener noreferrer" href="https://github.com/francinen">Francine Navarro</a>, <a target="_blank" rel="noopener noreferrer" href="https://github.com/TerencedzLi">Terence Li</a>, and <a target="_blank" rel="noopener noreferrer" href="https://ben-che.com">Ben Che</a> that helped us build this.
             <br /><br />

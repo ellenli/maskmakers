@@ -31,7 +31,6 @@ const FilterItem = ({ isChecked, onChange, title, id, type, count }) => {
           <>{isChecked ? <SquareCheckIcon /> : <SquareIcon />}</>
         )}
         <span className={styles.labelTitle}>{title}</span>
-        {type === "row" && <span className={styles.count}>{count}</span>}
       </label>
     </span>
   );
