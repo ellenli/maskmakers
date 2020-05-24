@@ -6,7 +6,7 @@ const Loader = () => {
     <div className={styles.container}>
       <div>
         <h1 className={styles.heading}>
-          #MaskOn
+          Loading...
         </h1>
         <div className={styles.spinner} />
       </div>
