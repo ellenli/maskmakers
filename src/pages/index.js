@@ -386,8 +386,6 @@ const App = () => {
             photoDescription
           } = merchant.data;
 
-          // Add a published to airtable and check below
-
           if (recordId == null || merchant == null || attachments == null) {
             return null;
           }
