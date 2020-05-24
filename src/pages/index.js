@@ -607,6 +607,7 @@ const App = () => {
   return (
     <Layout>
       <div className={styles.container}>
+        <a href="#mainContent" className={styles.skipLink}>Skip to main content</a>
         <div className={styles.sidebar}>
           <Nav
             filter
@@ -618,7 +619,8 @@ const App = () => {
 
           {categoryFilters}
         </div>
-        <div
+        <main
+          id="mainContent"
           className={classnames({
             [styles.main]: true,
             [styles.slide]: isFilterListVisible
@@ -627,7 +629,7 @@ const App = () => {
         >
           {isLoading ? <Loader /> : pageBody}
           {dialogOverlay}
-        </div>
+        </main>
       </div>
     </Layout>
   );

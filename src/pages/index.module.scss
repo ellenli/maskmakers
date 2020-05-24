@@ -230,3 +230,20 @@
     text-decoration: none;
   }
 }
+
+.skipLink {
+  left: 20px;
+  top: 20px;
+  position: absolute;
+  transform: translateY(-250%);
+  transition: transform 0.3s;
+  margin: 10px;
+  background: #fff;
+  padding: 10px;
+  z-index: 3;
+  border-radius: 4px;
+
+  &:focus {
+    transform: translateY(0%);
+  }
+}
