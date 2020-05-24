@@ -21,7 +21,7 @@ const About = () => (
           
           <h2 className={styles.subheading}>How do I add a store to the directory?</h2>
           <p className={styles.about}>
-            To join the directory, or add someone you know, please complete this simple form.
+            To join the directory, or add someone you know, please complete <a target="_blank" rel="noopener noreferrer" href="https://airtable.com/shrG3WYY0EFTUjbp5">this simple form</a>.
             <br /><br />
             If you have been featured in our directory and would like to be removed, please contact us.
           </p>
@@ -30,7 +30,7 @@ const About = () => (
           <p className={styles.about}>
             This director is a project started by the Asian Employee Resource Group at Shopify: Leanne Macaspac, Lisa Vanderschuit, Peter Ho, John Oh, Yosha Khan, Aman Biswas, Maple Ong, Carolynn Nguyen.
             <br /><br />
-            Special thank you to our community friends, Francine Navarro, Terence Li, and Ben Che that helped us build this.
+            Special thank you to our community friends, <a target="_blank" rel="noopener noreferrer" href="https://github.com/francinen">Francine Navarro</a>, <a target="_blank" rel="noopener noreferrer" href="https://github.com/TerencedzLi">Terence Li</a>, and <a target="_blank" rel="noopener noreferrer" href="https://ben-che.com">Ben Che</a> that helped us build this.
             <br /><br />
             Our website is built on Women Who Design and inspired by our friends that built Mask Makers Club. Our source code is on <a target="_blank" rel="noopener noreferrer" href="https://github.com/ben-che/AHM">Github</a>.
           </p>

@@ -69,6 +69,6 @@ module.exports = {
   ],
 
   siteMetadata: {
-    title: "Mask Makers Club"
+    title: "Asian Heritage Month Marketplace"
   }
 };
